@@ -3,9 +3,9 @@
 abstract class AbstractController {
 	
 	protected $view;
-	
-	public function __construct($view) {
+	public function __construct($view,$objects) {
 		$this->view = $view;
+
 	}
 	
 	abstract protected function render($str);
@@ -16,5 +16,3 @@ abstract class AbstractController {
 	}
 	
 }
-
-?>

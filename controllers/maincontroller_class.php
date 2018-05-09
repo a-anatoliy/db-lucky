@@ -6,8 +6,11 @@ class MainController extends AbstractController {
 	protected $meta_desc;
 	protected $meta_key;
 	
-	public function __construct() {
-		parent::__construct(new View(DIR_TMPL));
+	public function __construct($objects) {
+		parent::__construct(new View(DIR_TMPL),$objects);
+		foreach ($objects as $k => $v) {
+		    $this->$k = $v;
+        }
 	}
 	
 	public function action404() {
@@ -21,11 +24,11 @@ class MainController extends AbstractController {
 		$this->render($content);
 	}
 	
-	public function actionIndex() {
+	public function actionHome() {
 		$this->title = "Главная страница";
 		$this->meta_desc = "Описание главной страницы.";
 		$this->meta_key = "описание, описание главной страницы";
-		
+
 		$content = $this->view->render("index", array(), true);
 		
 		$this->render($content);
@@ -51,5 +54,3 @@ class MainController extends AbstractController {
 	}
 	
 }
-
-?>

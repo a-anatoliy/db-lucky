@@ -12,14 +12,16 @@ spl_autoload_extensions("_class.php");
 spl_autoload_register();
 
 define("ROOT_DIR", __DIR__ );
-define("DIR_TMPL", ROOT_DIR."/tmpl/");
+define("THEME", 'default' );
+define("DIR_TMPL", ROOT_DIR.'/themes/'.THEME.'/tmpl/');
 define("MAIN_LAYOUT", "main");
 define('_ATHREERUN', 1 );
 
 define('CONFIG',ROOT_DIR .'/data/cfg/config.php');
 
-include ROOT_DIR .'/lib/SxGeo.php';
-require_once ROOT_DIR . '/lib/Utils.php';
+//include ROOT_DIR .'/lib/SxGeo.php';
+
+//require_once ROOT_DIR . '/lib/Utils.php';
 
 if ( !isset( $_SESSION["origURL"] ) ) {
 

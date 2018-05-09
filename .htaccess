@@ -1,10 +1,10 @@
 AddDefaultCharset UTF-8
 
 # Принудительная постановка замыкающего слеша
-<IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_URI} /+[^\.]+$
-    RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
-</IfModule>
+#<IfModule mod_rewrite.c>
+#    RewriteCond %{REQUEST_URI} /+[^\.]+$
+#    RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
+#</IfModule>
 
 <FilesMatch "\.(ttf|otf|eot|woff)$">
 <IfModule mod_headers.c>

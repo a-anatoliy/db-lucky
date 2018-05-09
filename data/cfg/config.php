@@ -1,10 +1,10 @@
 <?php 
 return array(
     'db' => array(
-        'host' => 'localhost',
-        'user' => '',
-        'pass' => '',
-        'name' => '',
+        'hst' => 'localhost',
+        'usr' => '',
+        'pss' => '',
+        'tbl' => '',
     ),
     'site' => array(
         'url'     => 'http://lucky-dress.eu/',
