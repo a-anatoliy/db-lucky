@@ -4,8 +4,6 @@ class Route {
 
 	public static function start() {
 
-        // get an array of available languages
-
         // collect all of vizitor parameters
         // http_ref, uri, cookies etc.
         // also get page and default language parameters
@@ -37,10 +35,19 @@ class Route {
                 return "POST";
             }
             else { echo json_encode(['code' => 500, 'message'=> "you can't use this form"]); }
-
             exit;
         }
         else {
+            // get an array of available languages
+            $langs = $d->selectPair(QueryMap::SELECT_LANGUAGES);
+            // check if current language supported
+            $v->isLangSupported($langs);
+
+//            echo "<pre>";print_r($d);echo "</pre>";
+//            echo "<pre>";print_r($v);echo "</pre>";
+//            echo "<pre>";print_r($langs);echo "</pre>";
+
+
             $controller_name = "Main";
 //		$action_name = "index";
             $action_name = $v->model;

@@ -63,54 +63,29 @@ class Data {
         return $this;
     }
 
+    public function selectPair($query) {
+        try {
+            $sth = $this->dbc->prepare($query);
+            $sth->execute();
+            return $sth->fetchAll(PDO::FETCH_KEY_PAIR);
+        } catch(PDOException $e) {
+            echo __LINE__.$e->getMessage();
+        }
+    }
     /* Function runQuery
      * Runs a insert, update or delete query
      * @param string sql insert update or delete statement
      * @return int count of records affected by running the sql statement.
      */
     public function runQuery( $sql ) {
+        $count = '';
         try {
-            $count = $this->dbc->exec($sql) or print_r($this->dbc->errorInfo());
+            $count = $this->dbc->exec($sql);
         } catch(PDOException $e) {
             echo __LINE__.$e->getMessage();
         }
         return $count;
     }
 
-    /* Function getQuery
-     * Runs a select query
-     * @param string sql insert update or delete statement
-     * @returns associative array
-     */
-    public function getQuery( $sql ) {
-        $stmt = $this->dbc->query( $sql );
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
-        return $stmt;
-    }
-
-/*
-        private $usr,$pss, $hst, $tbl;
-        private $opts;
-
-    public function __construct($cfg) {
-
-
-    }
-
-    // ============================================================================
-    public function lemmeIn() {
-
-        set_exception_handler(function($e) {
-            error_log($e->getMessage());
-            exit('Something weird happened: '.$e->getMessage()); //something a user can understand
-        });
-
-        $dsn = "mysql:host=".$this->hst.";dbname=".$this->tbl.";charset=utf8mb4";
-
-        try { $this->pdo = new PDO($dsn, $this->usr, $this->pss, $this->opts); }
-        catch (PDOException $e) { $e->getMessage();       }
-
-    }
-*/
 }

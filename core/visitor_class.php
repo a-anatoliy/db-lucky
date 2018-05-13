@@ -17,7 +17,7 @@ class Visitor {
     const LANGUAGE_COOKIE_NAME = 'LuckyDRESS_lang';
 
     // Cookie Name used for each visitor
-    const VISITED_COOKIE_NAME  = 'LuckyDRESS_Visited';
+    const VISITED_COOKIE_NAME  = 'LuckyDRESS_visited';
 
     // Where to obtain info about visitor
     const IP_INFO_SITE  = 'http://ipinfo.io/';
@@ -62,7 +62,7 @@ class Visitor {
 
         // set initial value of current language
         // and default value of requested sub page name
-        // $this->langAbbr = $this->sub_model = '';
+        $this->langAbbr = $this->sub_model = '';
 
         // set default country code
         $this->country_code = $this::DEF_LANGUAGE;
@@ -102,7 +102,6 @@ class Visitor {
     }
 
     private function checkLanguage() {
-
         if ( empty($this->langAbbr) ) {
             $needGeo = false;
             // either unsupported lang or doesn't set
@@ -119,9 +118,10 @@ class Visitor {
             $this->langAbbr = ($needGeo) ? $this->getLangByGeo() : $sessinLang ;
         }
 
-        $key = $this::LANGUAGE_COOKIE_NAME;
-        setcookie ($key, $this->langAbbr, time() + 3600*24, "/");
-        $_SESSION[$key] = $this->langAbbr;
+        $this->setLangParams();
+//        $key = $this::LANGUAGE_COOKIE_NAME;
+//        setcookie ($key, $this->langAbbr, time() + 3600*24, "/");
+//        $_SESSION[$key] = $this->langAbbr;
     }
 
     private function getLangByGeo() {
@@ -135,6 +135,16 @@ class Visitor {
         return $lang ? $lang : $this::DEF_LANGUAGE;
     }
 
+    public function isLangSupported(array $langs) {
+        if(! in_array($this->langAbbr,$langs)) {
+            echo "<hr>UNSUPPORTED LANGUAGE DETECTED!!!<hr>";
+            print_r($this->langAbbr);
+            $this->langAbbr = Visitor::DEF_LANGUAGE;
+            $this->setLangParams();
+        }
+        return $this;
+    }
+
     private function checkCookie() {
         $lang = NULL;
         if (isset($_COOKIE[$this::LANGUAGE_COOKIE_NAME])) {
@@ -142,7 +152,6 @@ class Visitor {
         }
         return $lang;
     }
-
     private function checkSession() {
         $lang = NULL;
         if (@$_SESSION[$this::LANGUAGE_COOKIE_NAME]) {
@@ -154,22 +163,14 @@ class Visitor {
     private function setPageName() {
         $this->uri = substr($this->uri, 1);
         if (! empty($this->uri)) {
-
             $routs = explode('/', str_replace(dirname($_SERVER['PHP_SELF'])."/",
                 "",$this->uri));
-            $this->model     = array_shift($routs);     // first param in uri
-            $this->langAbbr  = array_shift($routs);     // second
+            $this->model     = array_shift($routs); // first param in uri
+            $this->langAbbr  = array_shift($routs); // second
             $this->sub_model = array_shift($routs); // third param
         }
 
-//        if (empty($this->lang)) {
-            // set the value language for current visitor
-            $this->checkLanguage();
-//        } else {
-
-//        }
-
-//        return $this;
+        $this->checkLanguage();
     }
 
     // Obtaining A visitor IP address
@@ -188,6 +189,14 @@ class Visitor {
         return $ip;
     }
 
+    private function setLangParams() {
+        foreach (['setCookieVal','setSessVal'] as $func) {
+            $this->$func($this::LANGUAGE_COOKIE_NAME,$this->langAbbr);
+        }
+    }
+
+    private function setSessVal ($k,$v) { $_SESSION[$k] = $v; }
+    private function setCookieVal($k,$v) { setcookie ($k, $v, time() + 3600*24, "/"); }
     private function v(&$var) { return !empty($var) ? $var : $this::UNDEF_VALUE; }
 
 }
