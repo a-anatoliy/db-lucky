@@ -1,7 +1,7 @@
 # Logs and databases #
 ######################
 *.log
-*.sql
+# *.sql
 *.sqlite
 
 # -- Media files
@@ -15,6 +15,7 @@
 .idea
 .idea/*
 
+data/cfg/config.php
 
 # OS generated files #
 ######################

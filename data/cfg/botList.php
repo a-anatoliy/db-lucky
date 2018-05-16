@@ -49,5 +49,10 @@ return array(
     'ia_archiver',
     'Teoma',
     'mauibot',
-    'dnyzbot'
+    'dnyzbot',
+    'cloudflare-alwaysonline',
+    'openlinkprofiler.org',
+    'nutch',
+    'ads.txt-crawler',
+    'adstxtcrawler',
 );
