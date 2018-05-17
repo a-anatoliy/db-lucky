@@ -27,17 +27,36 @@ CREATE TABLE IF NOT EXISTS `ld_contact_form` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- ld_auxiliary_phrases -------------------------------------------------------------
+-- ld_auxiliary_phrases --------------------------------------------------
 DROP TABLE IF EXISTS `ld_auxiliary_phrases`;
 CREATE TABLE IF NOT EXISTS `ld_auxiliary_phrases` (
   `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
-  `page_name` VARCHAR(255) DEFAULT NULL,             -- on which page it's used
-  `subst_name` VARCHAR(255) DEFAULT NULL,             -- on which page it's used
+  `page_name` VARCHAR(255) DEFAULT NULL,    -- on which page it's used
+  `subst_name` VARCHAR(255) DEFAULT NULL,   -- an variable name that will be used for substitution
   `phrase` varchar(255) DEFAULT NULL,
   `edit_date` int(10) DEFAULT NULL,
   `lang_id` tinyint(1) unsigned DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- ld_pages -------------------------------------------------------------
+DROP TABLE IF EXISTS `ld_pages`;
+CREATE TABLE IF NOT EXISTS `ld_pages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `page_name` VARCHAR(255) DEFAULT NULL,    -- human readable url
+  `sort_id` tinyint(3) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `additional_header` mediumtext,
+  `keywords` mediumtext,
+  `meta_description` varchar(200) DEFAULT NULL,
+  `announcement` varchar(255) DEFAULT NULL,
+  `content` mediumtext,
+  `active` enum('1','0') NOT NULL DEFAULT '1',
+  `active_from` int(10) DEFAULT NULL,
+  `lang_id` tinyint(1) unsigned DEFAULT '1',
+  `last_edit` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 
 -- ld_user_role -------------------------------------------------------------
