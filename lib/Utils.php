@@ -8,7 +8,6 @@
  */
 class Utils {
 
-
     /**
      * @param $directoryPath
      */
@@ -46,112 +45,6 @@ class Utils {
         }
 
         return $newname;
-    }
-
-    /* CRUD functions */
-
-
-
-
-    /* $value = 'Justin Bieber' */
-    /**
-     * @param $pdo
-     * @param $table
-     * @param $value
-     * @return string
-     */
-    public function sqlInsert($pdo,$table,$value) {
-        try {
-//            $pdo = new PDO('mysql:host=localhost;dbname=someDatabase', $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->prepare('INSERT INTO '.$table.' VALUES(:name)');
-            $stmt->execute(array(
-                ':name' => $value
-            ));
-
-            # affected rows?
-            return $stmt->rowCount(); // 1
-        } catch(PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-    }
-
-    /**
-     * @param $pdo
-     * @param $table
-     * @param $id
-     * @param $value
-     * @return string
-     */
-    public function sqlUpdate($pdo,$table,$id,$value) {
-        try {
-//            $pdo = new PDO('mysql:host=localhost;dbname=someDatabase', $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->prepare('UPDATE '.$table.' SET name = :name WHERE id = :id');
-            $stmt->execute(array(
-                ':id'   => $id,
-                ':name' => $value
-            ));
-
-            return $stmt->rowCount(); // 1
-        } catch(PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-
-    }
-
-    /**
-     * @param $pdo
-     * @param $table
-     * @param $id
-     * @return string
-     */
-    public function sqlDelete($pdo,$table,$id) {
-        try {
-//            $pdo = new PDO('mysql:host=localhost;dbname=someDatabase', $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->prepare('DELETE FROM '.$table.' WHERE id = :id');
-            $stmt->bindParam(':id', $id); // Воспользуемся методом bindParam
-            $stmt->execute();
-
-            return $stmt->rowCount(); // 1
-        } catch(PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-    }
-
-    /**
-     * @param $pdo
-     * @param $query
-     * @param $value
-     * @return string
-     */
-    public function sqlSelect($pdo, $query, $value="") {
-        try {
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $q = $pdo->prepare($query);
-            if (empty($value)) {$q->execute();} else { $q->execute($value); }
-            return $q->fetchAll();
-        } catch(PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-    }
-
-    public static function getSupportedLanguages($parent) {
-        // ->dbh,QueryMap::SELECT_LANGUAGES
-        try {
-            $parent->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $q = $parent->dbh->prepare(QueryMap::SELECT_LANGUAGES);
-            $res = $q->fetchAll();
-echo '<pre>obj: '; var_dump($res); echo '</pre>';
-            return $res;
-
-        } catch(PDOException $e) {
-            return 'Error: ' . $e->getMessage();
-        }
     }
 
     /**
@@ -261,7 +154,7 @@ echo '<pre>obj: '; var_dump($res); echo '</pre>';
      * принимает адрес и возвращает массив содержащий широту и долготу
      */
 
-    public function getLatLong($address){
+    public function getLatLong($address) {
         if (!is_string($address))die("All Addresses must be passed as a string");
         $_url = sprintf('http://maps.google.com/maps?output=js&q=%s',rawurlencode($address));
         $_result = false;
@@ -297,6 +190,7 @@ echo '<pre>obj: '; var_dump($res); echo '</pre>';
     }
 
     public function buildCarouselImages($IndexFile,$limit = 5) {
+
         $stringFormat = '<div class="carousel-item%s"><img class="d-block w-100" src="%s"></div>';
         $count = 0; $imgList = array();
         $imagesString="\n"; $activeMark = " active";
@@ -391,4 +285,36 @@ echo '<pre>obj: '; var_dump($res); echo '</pre>';
         return (file_exists($filename) ? true : false);
     }
 
+    public function is_bot() {
+        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+            $options = array(
+                'YandexBot', 'YandexAccessibilityBot', 'YandexMobileBot','YandexDirectDyn',
+                'YandexScreenshotBot', 'YandexImages', 'YandexVideo', 'YandexVideoParser',
+                'YandexMedia', 'YandexBlogs', 'YandexFavicons', 'YandexWebmaster',
+                'YandexPagechecker', 'YandexImageResizer','YandexAdNet', 'YandexDirect',
+                'YaDirectFetcher', 'YandexCalendar', 'YandexSitelinks', 'YandexMetrika',
+                'YandexNews', 'YandexNewslinks', 'YandexCatalog', 'YandexAntivirus',
+                'YandexMarket', 'YandexVertis', 'YandexForDomain', 'YandexSpravBot',
+                'YandexSearchShop', 'YandexMedianaBot', 'YandexOntoDB', 'YandexOntoDBAPI',
+                'Googlebot', 'Googlebot-Image', 'Mediapartners-Google', 'AdsBot-Google',
+                'Mail.RU_Bot', 'bingbot', 'Accoona', 'ia_archiver', 'Ask Jeeves',
+                'OmniExplorer_Bot', 'W3C_Validator', 'WebAlta', 'YahooFeedSeeker', 'Yahoo!',
+                'Ezooms', '', 'Tourlentabot', 'MJ12bot', 'AhrefsBot', 'SearchBot', 'SiteStatus',
+                'Nigma.ru', 'Baiduspider', 'Statsbot', 'SISTRIX', 'AcoonBot', 'findlinks',
+                'proximic', 'OpenindexSpider','statdom.ru', 'Exabot', 'Spider', 'SeznamBot',
+                'oBot', 'C-T bot', 'Updownerbot', 'Snoopy', 'heritrix', 'Yeti',
+                'DomainVader', 'DCPbot', 'PaperLiBot'
+            );
+
+            foreach($options as $row) {
+                if (stripos($_SERVER['HTTP_USER_AGENT'], $row) !== false) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
+

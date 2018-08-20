@@ -42,10 +42,10 @@ class Visitor {
     // $lang  - current language
     // $model - requested page name
     // $sub_model page name: /media/pl/2018
-    public $langAbbr,$model,$sub_model;
+    public $langAbbr,$lang_code,$model,$sub_model;
 
     public $dbFields = array('date','ip','uri','agent','ref','query','user','geoloc');
-    
+
     private $propName = array(
         'agent' => 'HTTP_USER_AGENT',
         'uri'   => 'REQUEST_URI',
@@ -137,11 +137,14 @@ class Visitor {
 
     public function isLangSupported(array $langs) {
         if(! in_array($this->langAbbr,$langs)) {
-            echo "<hr>UNSUPPORTED LANGUAGE DETECTED!!!<hr>";
-            print_r($this->langAbbr);
+        //  echo "<hr>UNSUPPORTED LANGUAGE DETECTED!!!<hr>";
             $this->langAbbr = Visitor::DEF_LANGUAGE;
             $this->setLangParams();
         }
+
+        $lang_codes = array_flip($langs);
+        $this->lang_code = $lang_codes[$this->langAbbr];
+
         return $this;
     }
 
@@ -152,6 +155,7 @@ class Visitor {
         }
         return $lang;
     }
+
     private function checkSession() {
         $lang = NULL;
         if (@$_SESSION[$this::LANGUAGE_COOKIE_NAME]) {

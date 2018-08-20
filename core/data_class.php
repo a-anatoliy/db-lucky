@@ -9,7 +9,7 @@
 class Data {
     // Database Connection Configuration Parameters
     // array('driver' => 'mysql','host' => '','dbname' => '','username' => '','password' => '')
-    protected $_config;
+//    protected $_config;
 
     // Database Connection
     public $dbc;
@@ -17,12 +17,22 @@ class Data {
     // Connection options
     private $opts;
 
+    /**
+     * Statement Handle.
+     */
+    public static $sth = null;
+
+    /**
+     * An SQL query.
+     */
+    public static $query = '';
+
     /* function __construct
      * Opens the database connection
      * @param $config is an array of database connection parameters
      */
-    public function __construct() {
-        $cfg = require_once CONFIG;
+    public function __construct($cfg) {
+
         $this->_cfg = $cfg['db'];
         $this->opts = [
             // turn off emulation mode for "real" prepared statements
@@ -51,7 +61,6 @@ class Data {
         // Check if the connection is already established
         if ($this->dbc == NULL) {
             // Create the connection
-//            $dsn = "mysql:host=".$this->_cfg['hst'].";dbname=". $this->_cfg['tbl'].";charset=utf8mb4";
             $dsn = sprintf("mysql:host=%s;dbname=%s;charset=utf8mb4",
                 $this->_cfg['hst'],$this->_cfg['tbl']);
             try {
@@ -60,7 +69,7 @@ class Data {
                 echo __LINE__.$e->getMessage();
             }
         }
-        return $this;
+        return $this->dbc;
     }
 
     public function selectPair($query) {
@@ -69,23 +78,37 @@ class Data {
             $sth->execute();
             return $sth->fetchAll(PDO::FETCH_KEY_PAIR);
         } catch(PDOException $e) {
-            echo __LINE__.$e->getMessage();
+            echo __LINE__.' - '.$e->getMessage();
         }
     }
+
+    /**
+     * select all rows from table
+     */
+    public function getAll($query, $param = array()) {
+        try {
+            self::$sth = self::getPDOConnection()->prepare($query);
+            self::$sth->execute((array) $param);
+            return self::$sth->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo __LINE__.' - '.$e->getMessage();
+        }
+    }
+
     /* Function runQuery
      * Runs a insert, update or delete query
      * @param string sql insert update or delete statement
      * @return int count of records affected by running the sql statement.
      */
-    public function runQuery( $sql ) {
-        $count = '';
-        try {
-            $count = $this->dbc->exec($sql);
-        } catch(PDOException $e) {
-            echo __LINE__.$e->getMessage();
-        }
-        return $count;
-    }
+//    public function runQuery( $sql ) {
+//        $count = '';
+//        try {
+//            $count = $this->dbc->exec($sql);
+//        } catch(PDOException $e) {
+//            echo __LINE__.$e->getMessage();
+//        }
+//        return $count;
+//    }
 
 
 }

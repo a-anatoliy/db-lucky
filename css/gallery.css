@@ -1,0 +1,16 @@
+/* .gallery { margin-top: 100px !important; } */
+/* .galleryName { margin-left: 42px; } */
+/*.clear { clear:both; }*/
+/*.galleryMoshna { float:left !important; }*/
+/*.photo-link { padding:5px; margin:5px; border:1px solid #ccc; display:block; width:212px !important; float:left; }*/
+.photo-link { border:1px solid #ccc; }
+.photo-link:hover { border-color: #761c19; }
+
+.gallery5 { overflow: hidden; width: 100% !important;}
+
+.gallery5 .ramka { float: left !important; margin-right: 10px; margin-bottom: 10px;}
+.gallery5 img { width: 150px; height: 150px; object-fit: cover !important; }
+
+/* .ramka {float: left !important; margin-right: 10px; margin-bottom: 10px; width: 100px; height: 130px; } */
+.ramka { width: 100px; height: 130px; }
+.gallery5 img {width: 100%; height: 100%; object-fit: cover;}
