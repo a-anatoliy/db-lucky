@@ -2,47 +2,58 @@
 
 class MainController extends AbstractController {
 
-	protected $data, $user, $cfg;
+	protected $data, $user, $cfg, $page_props;
 
 	public function __construct($objects) {
 		parent::__construct(new View(DIR_TMPL),$objects);
 		foreach ($objects as $k => $v) {
 		    $this->$k = $v;
         }
+        $this->page_props = array();
 	}
 
 	public function action404() {
 		parent::action404();
-		$this->title     = "Страница не найдена - 404";
-		$this->meta_desc = "Запрошенная страница не существует.";
-		$this->meta_key  = "страница не найдена, страница не существует, 404";
 
-		$content = $this->view->render("404", array(), true);
+        $this->user->model = "404";
+        $this->getPageData();
+        $this->page_props["requested_page"] = $this->user->uri;
+
+        if (isset($this->user->ip)) {
+            $details = json_decode(file_get_contents("http://ipinfo.io/{$this->user->ip}/json"));
+            if(isset($details->country)) {
+                $this->page_props["country"] = sprintf("<div>[%s] %s</div><div>%s<br><em>%s</em></div>",
+                    $details->country, $details->region, $details->org, $details->city);
+            } else {
+                $this->page_props["country"] = "...";
+            }
+        }
+
+		$content = $this->view->render("404", $this->page_props, true);
 
 		$this->render($content);
 	}
 
     public function actionHome() {
 
-        $items = $this->data->getAll(QueryMap::SELECT_PAGE_DATA,
-            [$this->user->model, $this->user->lang_code]);
+        $this->getPageData();
 
-        if (empty($items)) {
-            $this->action404();
-        } else {
-            $params = array_shift($items);
+        $this->page_props["intro"] = $this->page_props["content"];
+        $this->page_props["carouselImages"] = $this->utils->buildCarouselImages($this->getImgIndex());
 
-            $params["intro"] = $params["content"];
-            $params["carouselImages"] = $this->utils->buildCarouselImages($this->getImgIndex());
-
-            $this->carousel  = $this->view->render("carousel", $params, true);
-            $content = $this->view->render("index", $params, true);
-            // echo "<pre>";print_r($content);echo "</pre>";
-            $this->render($content);
-        }
+        $this->carousel = $this->view->render("carousel", $this->page_props, true);
+        $content = $this->view->render("index", $this->page_props, true);
+        // echo "<pre>";print_r($content);echo "</pre>";
+        $this->render($content);
+//        }
 
     }
 
+    public function actionAbout() {
+        $this->getPageData();
+        $content = $this->view->render("about", $this->page_props, true);
+        $this->render($content);
+    }
 
     protected function render($str) {
 /*
@@ -56,41 +67,31 @@ class MainController extends AbstractController {
             "baseMenu" => "renderBase",
             "langsMenu"=> "renderLangs"
         );
-        $params = array();
 
-//        foreach (array("meta_desc","meta_key") as $key) {
-//		    if (empty($params[$key])) {
-//            $params[$key] = sprintf("%s - %s",$this->$key, $this->langPack[$key]);
-//            $params[$key] = $this->$key;
-//            }
-//        }
+        $this->page_props["header"]    = $this->view->render("header", array(), true);
+        $this->page_props["carousel"]  = $this->user->model == 'home' ? $this->carousel : '';
 
-//        if (preg_match("/home/i",$this->title)) {
-//            $params["title"] = $this->langPack["title"];
-//        } else {
-//            $params["title"] = $this->title." - ".$this->langPack["title"];
-//        }
+        $this->page_props["menu"]      = $this->view->render("menu", $menus, true);
 
-//		$params["meta_desc"] = $this->langPack["meta_desc"];
-//		$params["meta_key"]  = $this->langPack["meta_key"];
+        $this->page_props["footer"]    = $this->view->render("footer", array(), true);
 
-//		$params["header"]    = $this->header;
-//		$params["footer"]    = $this->footer;
-
-//        $this->actionPage = 'home';
-        $params["header"]    = $this->view->render("header", array(), true);
-        $params["carousel"]  = $this->user->model == 'home' ? $this->carousel : '';
-
-//		$params["menu"]      = $menu->buildMenu();
-        $params["menu"]      = $this->view->render("menu", $menus, true);
-
-        $params["footer"]    = $this->view->render("footer", array(), true);
-        $params["content"]   = $str;
-        $this->view->render(MAIN_LAYOUT, $params);
+        $this->page_props["content"]   = $str;
+        $this->view->render(MAIN_LAYOUT, $this->page_props);
     }
 
     private function getImgIndex() {
         return ROOT_DIR.$this->cfg["site"]["imgIndex"];
     }
 
+    private function getPageData() {
+        $items = $this->data->getAll(QueryMap::SELECT_PAGE_DATA,
+            [$this->user->model, $this->user->lang_code]);
+
+        if (empty($items)) {
+            $this->action404();
+        } else {
+            $this->page_props = array_shift($items);
+        }
+        return $this;
+    }
 }

@@ -72,7 +72,7 @@ class Route {
             if (method_exists($controller, $action_name)) {
                 $controller->$action_name();
             }
-            else { $controller->action404(); }
+            else {  $controller->action404(); }
         }
 	}
 
