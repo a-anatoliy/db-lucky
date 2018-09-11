@@ -42,7 +42,7 @@ class Visitor {
     // $lang  - current language
     // $model - requested page name
     // $sub_model page name: /media/pl/2018
-    public $langAbbr,$lang_code,$model,$sub_model;
+    public $langAbbr,$lang_code,$model,$sub_model,$supp_langs;
 
     public $dbFields = array('date','ip','uri','agent','ref','query','user','geoloc');
 
@@ -142,8 +142,9 @@ class Visitor {
             $this->setLangParams();
         }
 
-        $lang_codes = array_flip($langs);
-        $this->lang_code = $lang_codes[$this->langAbbr];
+        $this->supp_langs = array_flip($langs);
+        // the code (ID) of current language
+        $this->lang_code = $this->supp_langs[$this->langAbbr];
 
         return $this;
     }

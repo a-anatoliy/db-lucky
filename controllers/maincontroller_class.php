@@ -2,7 +2,7 @@
 
 class MainController extends AbstractController {
 
-	protected $data, $user, $cfg, $page_props;
+	protected $data, $user, $cfg, $page_props, $carousel;
 
 	public function __construct($objects) {
 		parent::__construct(new View(DIR_TMPL),$objects);
@@ -45,7 +45,6 @@ class MainController extends AbstractController {
         $content = $this->view->render("index", $this->page_props, true);
         // echo "<pre>";print_r($content);echo "</pre>";
         $this->render($content);
-//        }
 
     }
 
@@ -56,16 +55,19 @@ class MainController extends AbstractController {
     }
 
     protected function render($str) {
-/*
-        $menu = new MenuController($this);
+
+	    $menu_properties = array(
+	        'lang'    => $this->user->langAbbr,
+            'langID'  => $this->user->lang_code,
+            's_langs' => $this->user->supp_langs,
+            'model'   => $this->user->model . $this->user->sub_model,
+            'dbh'     => $this->data,
+        );
+        $menu = new MenuController($menu_properties);
+
         $menus = array(
             "baseMenu" => $menu->renderBase(),
             "langsMenu"=> $menu->renderLangs()
-        );
-*/
-        $menus = array(
-            "baseMenu" => "renderBase",
-            "langsMenu"=> "renderLangs"
         );
 
         $this->page_props["header"]    = $this->view->render("header", array(), true);
