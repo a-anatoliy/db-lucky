@@ -43,7 +43,6 @@ class MainController extends AbstractController {
 
         $this->carousel = $this->view->render("carousel", $this->page_props, true);
         $content = $this->view->render("index", $this->page_props, true);
-        // echo "<pre>";print_r($content);echo "</pre>";
         $this->render($content);
 
     }
@@ -53,6 +52,51 @@ class MainController extends AbstractController {
         $content = $this->view->render("about", $this->page_props, true);
         $this->render($content);
     }
+
+// --------------------------------------------------------------
+    public function actionMedia() {
+
+//		$content = $this->view->render("about", array(), true);
+        $params = array();
+
+        foreach ($this->cfg["mediaDirs"] as $n => $dir) {
+            $params[$n]  = $this->utils->getImgContainer($this->getImgIndex(),$dir);
+            $params[$n."Title"] = $this->langPack["media"][$n];
+        }
+
+        $content = $this->view->render("media", $params, true);
+
+        $this->render($content);
+    }
+
+    public function actionContact() {
+        $this->getPageData();
+        // now we have only usefull "content" in $this->page_props
+        // ------------------------------------------------------
+        $items = $this->data->getAll(QueryMap::SELECT_FORM_PHRASES,
+            [$this->user->lang_code]);
+
+        $content="";
+//        $result = array();
+        foreach ($items as $item) {
+            foreach ($item as $k => $v) {
+                $newKey="";
+//                if (preg_match("/required/i",$k) && $v > 0) {
+//                    $newKey=sprintf("%s_required",$item["field_name"]);
+//                } else {
+                $newKey = sprintf("%s_%s",$k,$item["field_name"]);
+//                }
+
+//                $result[$newKey] = $v;
+                $this->page_props[$newKey] = $v;
+            }
+        }
+
+//        echo "<pre>";print_r($this->page_props);echo "</pre>";
+        $content = $this->view->render("contact", $this->page_props, true);
+        $this->render($content);
+    }
+// --------------------------------------------------------------
 
     protected function render($str) {
 
