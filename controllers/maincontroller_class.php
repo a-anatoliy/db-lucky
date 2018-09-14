@@ -1,4 +1,6 @@
 <?php
+//  debug string:
+//    echo "<pre>";print_r($this->page_props);echo "</pre>";
 
 class MainController extends AbstractController {
 
@@ -68,35 +70,30 @@ class MainController extends AbstractController {
 
         $this->render($content);
     }
+// --------------------------------------------------------------
 
     public function actionContact() {
         $this->getPageData();
-        // now we have only usefull "content" in $this->page_props
+        // now we have only useful "content" in $this->page_props
         // ------------------------------------------------------
+        // now get all of auxiliary
+        $this->getAuxPhrases();
+        // ------------------------------------------------------
+        // now get all of form phrases
         $items = $this->data->getAll(QueryMap::SELECT_FORM_PHRASES,
             [$this->user->lang_code]);
-
-        $content="";
-//        $result = array();
+        // now fill the contact page template using form phrases
         foreach ($items as $item) {
             foreach ($item as $k => $v) {
-                $newKey="";
-//                if (preg_match("/required/i",$k) && $v > 0) {
-//                    $newKey=sprintf("%s_required",$item["field_name"]);
-//                } else {
                 $newKey = sprintf("%s_%s",$k,$item["field_name"]);
-//                }
-
-//                $result[$newKey] = $v;
                 $this->page_props[$newKey] = $v;
             }
         }
-
-//        echo "<pre>";print_r($this->page_props);echo "</pre>";
+        // ------------------------------------------------------
+        // now let's render all of above data
         $content = $this->view->render("contact", $this->page_props, true);
         $this->render($content);
     }
-// --------------------------------------------------------------
 
     protected function render($str) {
 
@@ -127,6 +124,20 @@ class MainController extends AbstractController {
 
     private function getImgIndex() {
         return ROOT_DIR.$this->cfg["site"]["imgIndex"];
+    }
+
+    private function getAuxPhrases() {
+        $aux = $this->data->getAll(QueryMap::SELECT_AUX_PHRASES,
+            [$this->user->model, $this->user->lang_code]);
+
+        if (empty($aux)) {
+            return 1;
+        } else {
+            while ($item = array_shift($aux)) {
+                $this->page_props[ $item['subst_name'] ] = $item['phrase'];
+            }
+        }
+        return $this;
     }
 
     private function getPageData() {

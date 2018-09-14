@@ -35,14 +35,14 @@ VALUES
 --
 INSERT INTO `ld_auxiliary_phrases` (`id`, `page_name`, `subst_name`, `phrase`, `edit_date`, `lang_id`) VALUES
 -- PL -----------------------------------------------------
-  (NULL,'contact', 'contact-header', 'Umówić się na spotkanie', UNIX_TIMESTAMP(), 1),
-  (NULL,'contact', 'contact-header-small', 'Prosimy o wcześniejszy kontakt telefoniczny w celu umówienia się na przymierzanie sukni.', UNIX_TIMESTAMP(), 1),
+  (NULL,'contact', 'contact_header', 'Umówić się na spotkanie', UNIX_TIMESTAMP(), 1),
+  (NULL,'contact', 'contact_header_small', 'Prosimy o wcześniejszy kontakt telefoniczny w celu umówienia się na przymierzanie sukni.', UNIX_TIMESTAMP(), 1),
 -- EN ----------------------------------------------
-  (NULL,'contact', 'contact-header', 'Arrange an appointment', UNIX_TIMESTAMP(), 2),
-  (NULL,'contact', 'contact-header-small', 'Please contact us via phone in advance regarding agreement on fitting the dress.', UNIX_TIMESTAMP(), 2),
+  (NULL,'contact', 'contact_header', 'Arrange an appointment', UNIX_TIMESTAMP(), 2),
+  (NULL,'contact', 'contact_header_small', 'Please contact us via phone in advance regarding agreement on fitting the dress.', UNIX_TIMESTAMP(), 2),
 -- RU ----------------------------------------------
-  (NULL,'contact', 'contact-header', 'Договориться о встрече', UNIX_TIMESTAMP(), 3),
-  (NULL,'contact', 'contact-header-small', 'Просим о предварительной договоренности о примерке платья.', UNIX_TIMESTAMP(), 3),
+  (NULL,'contact', 'contact_header', 'Договориться о встрече', UNIX_TIMESTAMP(), 3),
+  (NULL,'contact', 'contact_header_small', 'Просим о предварительной договоренности о примерке платья.', UNIX_TIMESTAMP(), 3),
 -- email about arranging  an appointment ------------------
 -- PL -----------------------------------------------------
   (NULL,'emailer', 'subject', 'Zaproszenie na spotkanie', UNIX_TIMESTAMP(), 1),
