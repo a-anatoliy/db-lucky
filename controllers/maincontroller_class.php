@@ -43,34 +43,35 @@ class MainController extends AbstractController {
         $this->page_props["intro"] = $this->page_props["content"];
         $this->page_props["carouselImages"] = $this->utils->buildCarouselImages($this->getImgIndex());
 
-        $this->carousel = $this->view->render("carousel", $this->page_props, true);
-        $content = $this->view->render("index", $this->page_props, true);
+        $this->carousel = $this->view->render('carousel', $this->page_props, true);
+        $content = $this->view->render('index', $this->page_props, true);
         $this->render($content);
 
     }
 
     public function actionAbout() {
         $this->getPageData();
-        $content = $this->view->render("about", $this->page_props, true);
+        $content = $this->view->render('about', $this->page_props, true);
         $this->render($content);
     }
 
-// --------------------------------------------------------------
     public function actionMedia() {
-
-//		$content = $this->view->render("about", array(), true);
-        $params = array();
+        // honestly - nothing special data there.
+        // for now only additional headers & page name
+        $this->getPageData();
+        // now get all of auxiliary
+        $this->getAuxPhrases();
 
         foreach ($this->cfg["mediaDirs"] as $n => $dir) {
-            $params[$n]  = $this->utils->getImgContainer($this->getImgIndex(),$dir);
-            $params[$n."Title"] = $this->langPack["media"][$n];
+            if (!empty($this->page_props[$n])) {
+                $this->page_props[$n."Title"] = $this->page_props[$n];
+                $this->page_props[$n]  = $this->utils->getImgContainer($this->getImgIndex(),$dir);
+            } else {continue;}
         }
 
-        $content = $this->view->render("media", $params, true);
-
+        $content = $this->view->render('media', $this->page_props, true);
         $this->render($content);
     }
-// --------------------------------------------------------------
 
     public function actionContact() {
         $this->getPageData();
@@ -91,7 +92,13 @@ class MainController extends AbstractController {
         }
         // ------------------------------------------------------
         // now let's render all of above data
-        $content = $this->view->render("contact", $this->page_props, true);
+        $content = $this->view->render('contact', $this->page_props, true);
+        $this->render($content);
+    }
+
+    public function actionBlog() {
+        $this->getPageData();
+        $content = $this->view->render('blog_main', $this->page_props, true);
         $this->render($content);
     }
 
