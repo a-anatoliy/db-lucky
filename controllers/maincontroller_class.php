@@ -98,6 +98,7 @@ class MainController extends AbstractController {
 
     public function actionBlog() {
         $this->getPageData();
+        $this->page_props['langAbbr'] = $this->user->langAbbr;
         $content = $this->view->render('blog_main', $this->page_props, true);
         $this->render($content);
     }

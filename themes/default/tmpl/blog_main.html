@@ -1,8 +1,15 @@
-<div class="row">
-    <div id="post-history" class="col-lg-3 col-md-3 col-sm-12">
-        arch
-    </div>
-    <div id="all_posts" class="col-lg-8 col-md-9 col-sm-12">
-        latest posts
-    </div>
+<div class="col-lg-4 col-md-3 col-sm-12 pt-5" id="post-history" >
+    <div id="my-calendar"></div>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $("#my-calendar").zabuto_calendar({language: "<?=$langAbbr?>"});
+        });
+    </script>
 </div>
+<div class="col-lg-8 col-md-9 col-sm-12" id="all_posts">
+    <h4 class="text-uppercase text-lg-center">blog</h4>
+
+</div>
+
+
+
