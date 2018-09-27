@@ -20,6 +20,35 @@ body {
 }
 */
 
+.link-hover-center a {
+    display: inline-block;
+    color:#07aa19;
+    line-height: 1;
+    text-decoration:none;
+    cursor: pointer;
+    position:relative;
+}
+.link-hover-center a:after {
+    display: block;
+    content: "";
+    background-color: #07aa19;
+    height: 3px;
+    width: 0%;
+    left:50%;
+    position:absolute;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    -webkit-transform:translateX(-50%);
+    -moz-transform:translateX(-50%);
+    transform:translateX(-50%);
+}
+.link-hover-center a:hover:after,
+.link-hover-center a:focus:after {
+    width: 100%;
+}
+
+
 #brdr {
     line-height: 1; border: 1px solid red;
     background-color: #9d9d9d;
@@ -62,7 +91,6 @@ h1, h2, h3, h4, h5, h6 { font-family: "Playfair Display", Georgia, "Times New Ro
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
-
 
 .navbar-toggle {
     border: none;
@@ -111,7 +139,6 @@ h1, h2, h3, h4, h5, h6 { font-family: "Playfair Display", Georgia, "Times New Ro
     transform: rotate(0);
 }
 
-
 .nav-scroller .nav-link { padding-top: .75rem; padding-bottom: .75rem; font-size: .875rem; }
 .card-img-right { height: 100%; border-radius: 0 3px 3px 0; }
 .flex-auto { -ms-flex: 0 0 auto; -webkit-box-flex: 0; flex: 0 0 auto; }
@@ -120,8 +147,7 @@ h1, h2, h3, h4, h5, h6 { font-family: "Playfair Display", Georgia, "Times New Ro
 @media (min-width: 768px) { .h-md-250 { height: 250px; } }
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
-
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05) !important; }
 
 /*.nav-link { text-shadow: #666666 0.1em 0.1em 0.2em; font-weight: 700; }*/
 .nav-link {

@@ -1,0 +1,35 @@
+
++----------------------+    +------------+   +----------+    +--------------+
+| dresses              |    | images     |   | currency |    | currency_map |
++----------------------+    +------------+   +----------+    +--------------+
+| id                   |    | id         |   | id       |    | dress_id     |
+| article_num          |    | path       |   | name     |    | currency_id  |
+| name                 |    | thumb_path |   +----------+    +--------------+
+| description          |    | dress_id   |
+| short_descr          |    +------------+
+| product_details      |
+| price                |     +--------+     +-----------+   +------------+  +----------------+
+| offer_price          |     | color  |     | color_map |   | collection |  | collection_map |
+| discount_price       |     +--------+     +-----------+   +------------+  +----------------+
+| price_offer_end_date |     | id     |     | dress_id  |   | id         |  | dress_id       |
+| order_counter        |     | name   |     | color_id  |   | name       |  | collection_id  |
+| likes_counter        |     +--------+     +-----------+   +------------+  +----------------+
+| care_advice          |
+| add_date             |     +--------+    +----------+
+| is_available         |     | size   |    | size_map |
+| is_active            |     +--------+    +----------+
++----------------------+     | id     |    | dress_id |
+                             | name   |    | size_id  |
+                             +--------+    +----------+
+
+ADD to each of dress SIZES, AVAILABLE_COLORS, CARRENCY, COLLECTION from an appropriate maps
+
+insert into color(1,'0 (XS)',2,'2 (XS)',3,'4 (S)',4,'6 (S)',5,'8 (M)',6,'10 (M)',7,'12 (L)',8,'14 (L)',9,'16 (XL)');
+insert into size(1,'white',2,'ivory',3,'soft white',4,'gold',5,'silver');
+insert into carrency(1,'PLN');
+insert into dresses(1,'VW351178','Marie Clare',
+'NEW to Bridal Pre-spring 18. Perfectly partnered with our NEW Marie Gown, this embroidered cape in antique blue features a new technique designed to capture the delicacy and beauty of antique lace. Fully embellished with iridescent sequins, this bridal cape has a satin ribbon tie detail for easy styling and is relaxed in fit. The perfect bridal accessory to compliment your wedding dress.<p><br>By Whispers & Echoes<br>Only available at BHLDN<br>Style #45266756</p',
+'WHITE BY VERA WANG TEXTURED ORGANZA WEDDING DRESS',
+'<div>Back zip with hook-and-eye closure; covered buttons<br>Polyester; polyester lining<br>Bust cups; boning<br>Professionally clean<br>Imported<br>We recommend pairing this gown with a veil in ivory<br>All gowns and select bridal apparel items require an additional shipping charge of $15</div>',
+5378,NULL,NULL,NULL,4,4,'Delicate dry clean only',NOW,1,1);
+

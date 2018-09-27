@@ -99,39 +99,70 @@ class MainController extends AbstractController {
     public function actionBlog() {
         $this->getPageData();
         $this->page_props['langAbbr'] = $this->user->langAbbr;
+
+        /* there are a few templates:
+         * dress_card, blog_card, famous_card
+         * there is one image path from the '/i/blog' directory
+        */
+
+        $object = $this->getMinObjProps();
+        $object['utils'] = $this->utils;
+        $object['blogImgPath'] = ROOT_DIR.$this->getCfgValue('site','blogImgPath');
+
+        $blogObject = new Blog( $object );
+
+        $this->page_props['workImage'] = $blogObject->getWorkImage();
+
+        $this->page_props['dress']  = $this->view->render('dress_card', array(), true);
+        $this->page_props['blog']   = $this->view->render('blog_card', array(), true);
+        $this->page_props['famous'] = $this->view->render('famous_card', array(), true);
+
+
         $content = $this->view->render('blog_main', $this->page_props, true);
         $this->render($content);
     }
 
+
     protected function render($str) {
 
-	    $menu_properties = array(
-	        'lang'    => $this->user->langAbbr,
+        $menu = new MenuController( $this->getMinObjProps() );
+
+        $menus = array(
+            'baseMenu' => $menu->renderBase(),
+            'langsMenu'=> $menu->renderLangs()
+        );
+
+        $this->page_props['header']    = $this->view->render('header', array(), true);
+        $this->page_props['carousel']  = $this->user->model == 'home' ? $this->carousel : '';
+
+        $this->page_props['menu']      = $this->view->render('menu', $menus, true);
+
+        $this->page_props['footer']    = $this->view->render('footer', array(), true);
+
+        $this->page_props['content']   = $str;
+        $this->view->render(MAIN_LAYOUT, $this->page_props);
+    }
+
+    private function getCfgValue($node,$value) {
+	    $out = false;
+	    if (!empty($node) && !empty($value)) {
+            $out = $this->cfg[$node][$value];
+	    }
+        return $out;
+    }
+
+    private function getMinObjProps() {
+	    return array(
+            'lang'    => $this->user->langAbbr,
             'langID'  => $this->user->lang_code,
             's_langs' => $this->user->supp_langs,
             'model'   => $this->user->model . $this->user->sub_model,
             'dbh'     => $this->data,
         );
-        $menu = new MenuController($menu_properties);
-
-        $menus = array(
-            "baseMenu" => $menu->renderBase(),
-            "langsMenu"=> $menu->renderLangs()
-        );
-
-        $this->page_props["header"]    = $this->view->render("header", array(), true);
-        $this->page_props["carousel"]  = $this->user->model == 'home' ? $this->carousel : '';
-
-        $this->page_props["menu"]      = $this->view->render("menu", $menus, true);
-
-        $this->page_props["footer"]    = $this->view->render("footer", array(), true);
-
-        $this->page_props["content"]   = $str;
-        $this->view->render(MAIN_LAYOUT, $this->page_props);
     }
 
     private function getImgIndex() {
-        return ROOT_DIR.$this->cfg["site"]["imgIndex"];
+        return ROOT_DIR.$this->getCfgValue('site','imgIndex');
     }
 
     private function getAuxPhrases() {

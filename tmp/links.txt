@@ -1,0 +1,128 @@
+https://github.com/gumlet/php-image-resize  - PHP library to resize, scale and crop images. Cloud solution available at: https://www.gumlet.com
+https://php-academy.kiev.ua/blog/optimizatsiya-izobrazheniy-v-php - Оптимизация изображений в РНР
+http://sitear.ru/material/preview_of_picture_with_php - Превью картинки на PHP
+https://github.com/IhorZhuk/jQueryImgGallery - jQueryImgGallery (2 years ago)
+
+
+https://github.com/phanan/htaccess - .htaccess Snippets
+
+http://bootstrap-4.ru/docs/4.0/components/list-group/ -
+http://bootstrap-4.ru/docs/4.0/examples/
+http://bootstrap-4.ru/docs/4.0/examples/blog/#
+
+https://srs.myrusakov.ru/php2?th=5a860d01c9094
+-------------------------------------------------------------
+https://github.com/joshcanhelp/php-form-builder/blob/master/PhpFormBuilder.php
+Список полезных PHP классов и библиотек
+https://habrahabr.ru/post/70808/
+30 чудных библиотек для PHP программистов
+https://habrahabr.ru/post/252851/
+https://github.com/dmolsen/Detector
+https://github.com/j4mie/idiorm/
+Использование связки из PHP и MySQL совместно с Google Maps
+https://habrahabr.ru/post/38290/
+Подключение Paypal
+https://geektimes.ru/post/82595/
+Локализация интерфейса сайта с использованием PHP, Smarty и Gettext
+https://habrahabr.ru/post/115300/
+------------------------------------
+Полное руководство по переходу с HTTP на HTTPS
+https://habrahabr.ru/post/332294/
+------------------------------------
+Работа с формами HTML — генерация форм
+https://habrahabr.ru/sandbox/112014/
+------------------------------------
+Создаем форму обратной связи с помощью Google Forms
+https://habrahabr.ru/post/148332/
+------------------------------------
+
+perl testing + bootstrap templates
+-------------------------------------------------------------
+https://www.techgig.com/skilltest/perl
+https://www.wisdomjobs.com/e-university/perl-scripting-interview-questions.html
+
+https://itchief.ru/lessons/different/free-icons-for-your-website
+
+https://hackerthemes.com/bootstrap-buffet/
+-------------------------------------------------------------
+https://www.loveandlavender.com/2017/11/best-online-wedding-dress-shops/#top
+13 BEST ONLINE SHOPS TO BUY AN AFFORDABLE WEDDING DRESS
+==========================================================
+http://www.databasedev.co.uk/data_models.html
+Sample Data Models
+==========================================================
+https://developers.google.com/maps/solutions/store-locator/clothing-store-locator
+==========================================================
+https://www.phptpoint.com/projects/online-shopping/
+==========================================================
+--------------------------------------------
+http://ohshitgit.com/
+https://tproger.ru/tag/oop/
+http://get_ip_address.onlinephpfunctions.com/
+https://towardsdatascience.com/how-to-learn-deep-learning-in-6-months-e45e40ef7d48
+https://medium.com/machine-learning-world/learning-path-for-machine-learning-engineer-a7d5dc9de4a4
+--------------------------------------------
+MySQL PDO  - https://htmlacademy.github.io/intensive-php-guide/content-06.html
+PHP HowTOS - https://htmlacademy.github.io/intensive-php-guide/content-06.html
+IntQuests  - http://unetway.com/blog/spisok-voprosov-i-zadac-pri-sobesedovanii-php-programmista/
+---------------------------------------------
+https://html5book.ru/css3-flexbox/#display-flex
+http://css-live.ru/articles/vizualnoe-rukovodstvo-po-svojstvam-flexbox-iz-css3.html
+https://webformyself.com/flexbox-primery-shablony-dlya-sajta-ot-nachala-i-do-konca/
+http://html5.by/blog/flexbox/
+https://wp-kama.ru/id_8045/flex-v-css.html
+https://www.w3schools.com/css/css3_flexbox.asp
+
+http://bootstrap-ru.com/203/scaffolding.php
+http://www.creative-seo.ru/bootstrap-4/grid-system/
+https://webdesign-master.ru/blog/html-css/2018-02-04-bootstrap-4.html
+---------------------------------------------
+Адаптивная вёрстка: что это и как использовать
+https://tproger.ru/translations/responsive-web-design-tips/
+----------------------------------------------
+ExamplesL
+https://mediaqueri.es/
+----------------------------------------------
+Оптимизирована ли ваша страница для мобильных устройств?
+https://search.google.com/test/mobile-friendly?utm_source=mft&utm_medium=redirect&utm_campaign=mft-redirect
+----------------------------------------------
+Отзывчивый и адаптивный дизайн сайта
+https://html5book.ru/otzyvchivyj-dizayn-saita/
+----------------------------------------------
+Сетка из блоков
+https://html5book.ru/adaptivnaya-vyorstka-urok-tretiy-setka-iz-blokov/
+https://html5book.ru/examples/masonry-portfolio/index.html
+----------------------------------------------
+Двойная пересекающаяся рамка для картинки
+https://html5book.ru/examples/styling-images/index5.html
+----------------------------------------------
+Идеи для оформления кнопок для сайта
+https://html5book.ru/examples/buttons-effects/index7.html
+----------------------------------------------
+Красивые кнопки для сайта
+https://html5book.ru/examples/styling-buttons/demo-styling-button-9.html
+----------------------------------------------
+Адаптивное выпадающее мега меню на CSS
+https://html5book.ru/adaptivnoe-vypadayushhee-mega-menyu-na-css/
+----------------------------------------------
+bxSlider — установка, настройки, примеры
+https://html5book.ru/bxslider-ustanovka-nastroyki-primery/
+----------------------------------------------
+Шрифт Awesome
+https://html5book.ru/shrift-awesome/
+----------------------------------------------
+Светлые фоны для сайта
+https://html5book.ru/svetlye-fony-dlya-sayta/
+----------------------------------------------
+Красивое оформление таблиц
+https://html5book.ru/krasivoe-oformlenie-tablic/
+----------------------------------------------
+Техники адаптивной типографской разметки текста
+https://webformyself.com/texniki-adaptivnoj-tipografskoj-razmetki-teksta/
+----------------------------------------------
+Адаптивная верстка сайтов: обзор подходов и CSS фреймворков
+https://jazzteam.org/ru/technical-articles/overview-of-approaches-and-css-frameworks-for-adaptive-web-page-layout/
+----------------------------------------------
+
+
+

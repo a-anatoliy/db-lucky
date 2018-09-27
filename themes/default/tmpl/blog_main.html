@@ -1,13 +1,49 @@
-<div class="col-lg-4 col-md-3 col-sm-12 pt-5" id="post-history" >
-    <div id="my-calendar"></div>
+<div class="col-lg-3 col-md-3 col-sm-12 pt-5 mt-5" id="post-history" >
+    <div id="my-calendar" class="bounceIn"></div>
     <script type="application/javascript">
         $(document).ready(function () {
             $("#my-calendar").zabuto_calendar({language: "<?=$langAbbr?>"});
         });
     </script>
 </div>
-<div class="col-lg-8 col-md-9 col-sm-12" id="all_posts">
-    <h4 class="text-uppercase text-lg-center">blog</h4>
+<div class="col-lg-9 col-md-9 col-sm-12 mb-5 mt-5" id="all_posts">
+
+    <div class="row text-lg-center">
+        <div class="card-columns">
+            <!-- 01 dress article -->
+            <?=$dress?>
+
+            <!-- 02 famous quote -->
+            <?=$famous?>
+
+            <!-- 03 dress article -->
+            <?=$dress?>
+
+            <!-- 04 famous quote -->
+            <div class="card bg-primary text-white text-center p-3">
+                <blockquote class="blockquote mb-0">
+                    <p><?=$famousQuote?></p>
+                    <footer class="blockquote-footer text-white">
+                        <small><?=$famousAuthor?></small>
+                    </footer>
+                </blockquote>
+            </div>
+
+            <!-- 05 blog article -->
+            <?=$blog?>
+
+            <!-- 06 -->
+            <div class="card">
+                <img class="card-img" src="/i/blog/<?=$workImage?>" alt="our work">
+            </div>
+
+            <!-- 07 famous quote -->
+            <?=$famous?> <!-- do we need to use additional class="text-right" ? -->
+
+            <!-- 08 blog article -->
+            <?=$blog?>
+        </div>
+    </div>
 
 </div>
 

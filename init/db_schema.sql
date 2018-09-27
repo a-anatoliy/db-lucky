@@ -69,3 +69,12 @@ CREATE TABLE `ld_user_role` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 insert into `ld_user_role` values (1,1,'Administrator'),(2,1,'Subscriber'),(3,1,'Editor'),(4,1,'Author'),(5,1,'TeamMember');
+
+-- ld_famous ----------------------------------------------------------------
+CREATE TABLE `ld_famous` (
+  `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
+  `phrase` varchar(255) DEFAULT NULL,
+  `auth` varchar(255) DEFAULT NULL,
+  `lang_id` tinyint(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
