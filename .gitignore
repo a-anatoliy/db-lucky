@@ -16,6 +16,7 @@
 .idea/*
 
 data/cfg/config.php
+data/cfg/rnd_string.php
 
 # OS generated files #
 ######################

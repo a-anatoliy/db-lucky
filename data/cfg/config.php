@@ -1,11 +1,5 @@
-<?php 
+<?php
 return array(
-    'db' => array(
-        'hst' => 'l',
-        'usr' => 'u',
-        'pss' => 'c',
-        'tbl' => 'k',
-    ),
     'site' => array(
         'url'     => 'http://lucky-dress.eu/',
     	'defLang' => 'pl',

@@ -16,6 +16,7 @@ class QueryMap {
     const SELECT_PAGES        = "SELECT id,page_name,announcement FROM ".QueryMap::DB_PREFIX."pages WHERE sort_id > 0 AND lang_id=? AND active=1 ORDER BY sort_id;";
     const SELECT_FAMOUS       = "SELECT * FROM ".QueryMap::DB_PREFIX."famous WHERE lang_id=? ORDER BY RAND() LIMIT ?;";
     const SELECT_FAMOUS_BY_ID = "SELECT * FROM ".QueryMap::DB_PREFIX."famous WHERE id=?";
+
 }
 
 

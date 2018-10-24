@@ -11,7 +11,7 @@ class Blog {
     private $blogs, $dresses, $famous,              // an arrays of articles
         $famousQuote, $famousAuthor,                // famous strings
         $workImage, $blogImgPath,                   // image related string
-        $famArticles, $dresArticles, $blogArticles; // how many articles do we have on
+        $famArticles, $dressArticles, $blogArticles; // how many articles do we have on
                                                     // the blog initial page
 
     public function __construct($parent) {
@@ -25,7 +25,7 @@ class Blog {
             }
         }
         // path to image
-        $this->getWorkImage();
+        $this->setWorkImage();
 
         // create an array of Famous articles (2 rows currently)
         $this->setFamous();
@@ -96,17 +96,16 @@ class Blog {
     /**
      * @return mixed
      */
-    public function getWorkImage() {
-        $imgList = $this->utils->getFilesFromDir($this->blogImgPath);
-        shuffle($imgList);
-        $this->setWorkImage(array_shift($imgList));
-        return $this->workImage;
-    }
+    public function getWorkImage() { return $this->workImage; }
 
     /**
      * @param mixed $workImage
      */
-    private function setWorkImage($workImage) { $this->workImage = $workImage; }
+    private function setWorkImage($workImage) {
+        $imgList = $this->utils->getFilesFromDir($this->blogImgPath);
+        shuffle($imgList);
+        $this->workImage = array_shift($imgList);
+    }
 
     /**
      * @return mixed
@@ -131,12 +130,12 @@ class Blog {
     /**
      * @return mixed
      */
-    public function getDresArticles() { return $this->dresArticles; }
+    public function getDressArticles() { return $this->dressArticles; }
 
     /**
-     * @param mixed $dresArticles
+     * @param mixed $dressArticles
      */
-    public function setDresArticles($dresArticles) { $this->dresArticles = $dresArticles; }
+    public function setDressArticles($dressArticles) { $this->dressArticles = $dressArticles; }
 
     /**
      * @return mixed
