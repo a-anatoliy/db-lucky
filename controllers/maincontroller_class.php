@@ -106,15 +106,33 @@ class MainController extends AbstractController {
         */
 
         $object = $this->getMinObjProps();
+        // add the copy of Utils object to work with images path
         $object['utils'] = $this->utils;
         $object['blogImgPath'] = ROOT_DIR.$this->getCfgValue('site','blogImgPath');
 
+        // now create an blog object
         $blogObject = new Blog( $object );
 
+        // get random image
         $this->page_props['workImage'] = $blogObject->getWorkImage();
 
-        $this->page_props['dress']  = $this->view->render('dress_card', array(), true);
-        $this->page_props['blog']   = $this->view->render('blog_card', array(), true);
+//        $blogData = $blogObject->getAllBlogData();
+//        echo "<pre>";print_r($blogObject);echo "</pre>";
+//
+//        foreach ($blogObject as $k => $v) {
+//            if(is_array($v)) {
+//                continue;
+//            } else {
+//                $this->page_props[$k] = $v;
+//                unset($blogObject->$k);
+//            }
+//        }
+
+//        echo '<pre>';print_r($blogObject);echo '</pre><hr>';
+
+
+        $this->page_props['dress']  = $this->view->render('dress_card',  array(), true);
+        $this->page_props['blog']   = $this->view->render('blog_card',   array(), true);
         $this->page_props['famous'] = $this->view->render('famous_card', array(), true);
 
 

@@ -8,69 +8,90 @@
 
 class Blog {
 
-    private $blogs, $dresses, $famous, $famousQuote, $famousAuthor, $workImage, $blogImgPath;
+    private $blogs, $dresses, $famous,              // an arrays of articles
+        $famousQuote, $famousAuthor,                // famous strings
+        $workImage, $blogImgPath,                   // image related string
+        $famArticles, $dresArticles, $blogArticles; // how many articles do we have on
+                                                    // the blog initial page
 
     public function __construct($parent) {
         if (empty($parent)) {
             echo "The parent object didn't initialized properly!";
             return 0;
         } else {
+            echo '<pre>';print_r($parent);echo '</pre><hr>';
             foreach ($parent as $k => $v) {
                 $this->$k = $v;
             }
-//            $this->getWorkImage();
         }
+        // path to image
+        $this->getWorkImage();
+
+        // create an array of Famous articles (2 rows currently)
+        $this->setFamous();
+
+        // create an array of Blogs articles (2 rows currently)
+        $this->setBlogs();
+
+        // create an array of Dresses articles (2 rows currently)
+        $this->setDresses();
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getBlogs() { return $this->blogs; }
 
     /**
-     * @param mixed $blogs
+     * @param array $blogs
      */
-    public function setBlogs($blogs) { $this->blogs = $blogs; }
+    private function setBlogs($blogs = array()) { $this->blogs = $blogs; }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getDresses() { return $this->dresses; }
 
     /**
-     * @param mixed $dresses
+     * @param array $dresses
      */
-    public function setDresses($dresses) { $this->dresses = $dresses; }
+    private function setDresses($dresses = array()) { $this->dresses = $dresses; }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getFamous() { return $this->famous; }
+    public function getFamous() {
+
+        return $this->famous;
+    }
 
     /**
-     * @param mixed $famous
+     * @param array $famous
      */
-    public function setFamous($famous) { $this->famous = $famous; }
+    private function setFamous($famous = array()) {
+        $this->famous = $famous;
+
+    }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFamousQuote()  { return $this->famousQuote; }
+    public function getFamousQuote() { return $this->famousQuote; }
 
     /**
-     * @param mixed $famousQuote
+     * @param string $famousQuote
      */
-    public function setFamousQuote($famousQuote) { $this->famousQuote = $famousQuote; }
+    private function setFamousQuote($famousQuote) { $this->famousQuote = $famousQuote; }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getFamousAuthor() { return $this->famousAuthor; }
 
     /**
-     * @param mixed $famousAuthor
+     * @param string $famousAuthor
      */
-    public function setFamousAuthor($famousAuthor) { $this->famousAuthor = $famousAuthor; }
+    private function setFamousAuthor($famousAuthor) { $this->famousAuthor = $famousAuthor; }
 
     /**
      * @return mixed
@@ -86,5 +107,45 @@ class Blog {
      * @param mixed $workImage
      */
     private function setWorkImage($workImage) { $this->workImage = $workImage; }
+
+    /**
+     * @return mixed
+     */
+    public function getBlogImgPath() { return $this->blogImgPath; }
+
+    /**
+     * @param mixed $blogImgPath
+     */
+    public function setBlogImgPath($blogImgPath) { $this->blogImgPath = $blogImgPath; }
+
+    /**
+     * @return mixed
+     */
+    public function getFamArticles() { return $this->famArticles; }
+
+    /**
+     * @param mixed $famArticles
+     */
+    public function setFamArticles($famArticles) { $this->famArticles = $famArticles; }
+
+    /**
+     * @return mixed
+     */
+    public function getDresArticles() { return $this->dresArticles; }
+
+    /**
+     * @param mixed $dresArticles
+     */
+    public function setDresArticles($dresArticles) { $this->dresArticles = $dresArticles; }
+
+    /**
+     * @return mixed
+     */
+    public function getBlogArticles() { return $this->blogArticles; }
+
+    /**
+     * @param mixed $blogArticles
+     */
+    public function setBlogArticles($blogArticles) { $this->blogArticles = $blogArticles; }
 
 }
