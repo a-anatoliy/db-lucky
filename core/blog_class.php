@@ -8,11 +8,11 @@
 
 class Blog {
 
-    private $blogs, $dresses, $famous,              // an arrays of articles
-        $famousQuote, $famousAuthor,                // famous strings
-        $workImage, $blogImgPath,                   // image related string
-        $famArticles, $dressArticles, $blogArticles; // how many articles do we have on
-                                                    // the blog initial page
+    private $blogs, $dresses, $famous,               // an arrays of articles
+        $famousQuote, $famousAuthor,                 // famous strings
+        $workImage, $blogImgPath,                    // image related string
+        $famArticles, $dressArticles, $blogArticles; // how many articles do we have to show on
+                                                     // the blog initial page
 
     public function __construct($parent) {
         if (empty($parent)) {
