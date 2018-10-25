@@ -8,8 +8,9 @@ AddDefaultCharset UTF-8
 
 <FilesMatch "\.(ttf|otf|eot|woff)$">
 <IfModule mod_headers.c>
-#    Header set Access-Control-Allow-Origin "http://lucky-dress.eu"
-    Header set Access-Control-Allow-Origin "dress"
+    Header set Access-Control-Allow-Origin "http://lucky-dress.eu"
+#    Header set Access-Control-Allow-Origin "dress"
+#    Header set Access-Control-Allow-Origin "lucky"
 </IfModule>
 </FilesMatch>
 
@@ -19,10 +20,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*) ./?%{QUERY_STRING}
 
 # предотвратить хотлинкинг изображений с сайта
-RewriteCond %{HTTP_REFERER} !^$
+#RewriteCond %{HTTP_REFERER} !^$
 #RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?lucky-dress.eu [NC]
-RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?dress [NC]
-RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
+#RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?dress [NC]
+#RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?lucky? [NC]
+#RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
 
 # отключаем вывод ошибок пользователям
 # ------------------------------------
