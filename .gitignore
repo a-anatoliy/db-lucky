@@ -1,5 +1,12 @@
 # Logs and databases #
 ######################
+# when .gitignore ignored by git and it doesn't work
+# first: commit all changes you do not want to lose!
+# git rm -r --cached .
+# git add .
+# git commit -m "fixed untracked files"
+######################
+
 *.log
 # *.sql
 *.sqlite
