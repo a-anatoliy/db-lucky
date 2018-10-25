@@ -17,6 +17,7 @@ define("DIR_TMPL"   , ROOT_DIR.'/themes/'.THEME.'/tmpl/' );
 define("MAIN_LAYOUT", "main" );
 define('_ATHREERUN' , 1 );
 define('CONFIG'     , ROOT_DIR . '/data/cfg/config.php');
+define('DB_CONFIG'  , ROOT_DIR . '/data/cfg/rnd_string.php');
 
 //include ROOT_DIR      .'/lib/SxGeo.php';
 require_once ROOT_DIR . '/lib/Utils.php';

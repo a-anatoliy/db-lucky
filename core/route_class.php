@@ -4,10 +4,13 @@ class Route {
 
     const DEF_CONTROLLER_NAME = 'Main';
 
-//	public static function start() {
 	public function start() {
 
-        $cfg = require_once CONFIG;
+        $cfg = array_merge(
+            require_once CONFIG,    // get main configuration
+            require_once DB_CONFIG  // get the database configuration
+        );
+
         // collect all of visitor parameters
         // http_ref, uri, cookies etc.
         // also get page and default language parameters
@@ -16,7 +19,6 @@ class Route {
         // establish the db connection
         $d = new Data($cfg);
 
-//        echo "<pre>";print_r($d);echo "</pre>";
         // check if we need to insert info about current visitor into db ?
         if ($v->insert) {
             echo "this is an unique user.thus we need to store information below in the database";

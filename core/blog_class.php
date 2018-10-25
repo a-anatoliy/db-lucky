@@ -19,7 +19,7 @@ class Blog {
             echo "The parent object didn't initialized properly!";
             return 0;
         } else {
-            echo '<pre>';print_r($parent);echo '</pre><hr>';
+//            echo '<pre>';print_r($parent);echo '</pre><hr>';
             foreach ($parent as $k => $v) {
                 $this->$k = $v;
             }
@@ -101,10 +101,14 @@ class Blog {
     /**
      * @param mixed $workImage
      */
-    private function setWorkImage($workImage) {
-        $imgList = $this->utils->getFilesFromDir($this->blogImgPath);
-        shuffle($imgList);
-        $this->workImage = array_shift($imgList);
+    private function setWorkImage($workImage = '') {
+        if (empty($workImage)) {
+            $imgList = $this->utils->getFilesFromDir($this->blogImgPath);
+            shuffle($imgList);
+            $this->workImage = array_shift($imgList);
+        } else {
+            $this->workImage = $workImage;
+        }
     }
 
     /**
