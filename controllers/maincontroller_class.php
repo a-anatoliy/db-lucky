@@ -114,9 +114,10 @@ class MainController extends AbstractController {
         }
 
 
-        foreach (range(1,$blogObject->getFamsCount()) as $id) {
-            $blogObject->getFamousRow();
-            $q = $blogObject->getFamousQuote(); $a = $blogObject->getFamousAuthor();
+        foreach (range(1, $blogObject->getFamsCount()) as $id) {
+            $blogObject->setFamousRow();
+            $q = $blogObject->getFamousQuote();
+            $a = $blogObject->getFamousAuthor();
 
             $this->page_props['famous_'.$id] =
                 $this->view->render('famous_card', array(

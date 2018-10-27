@@ -10,6 +10,7 @@
 
 class Blog extends MainController {
 
+    public $outDataArray = array();
     private $blogs, $dresses, $famous,      // an arrays of articles
         $famousQuote, $famousAuthor,        // famous strings
         $workImage, $blogImgPath,           // image related string
@@ -17,6 +18,7 @@ class Blog extends MainController {
                                             // the blog initial page
 
     private $initItems = array('blogImgPath','famsCount','dresCount','blogCount');
+    private $outItems = array('workImage','famousQuote','famousAuthor');
 
     public function __construct($p) {
         parent::__construct($p);
@@ -45,12 +47,21 @@ class Blog extends MainController {
         $this->setFamous();
 
         //
-        $this->getFamousRow();
+        $this->setFamousRow();
 
     }
 
+    /**
+     * @return mixed
+     */
+    public function fillBlogData() {
 
-    public function getFamousRow() {
+
+
+        return $outDataArray;
+    }
+
+    public function setFamousRow() {
         if(sizeof($this->getFamous())>0) {
             $fams = array_shift($this->famous);
             $this->setFamousQuote($fams['phrase']);
