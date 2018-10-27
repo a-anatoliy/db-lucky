@@ -4,151 +4,112 @@
  * User: Anatol
  * Date: 27.09.2018
  * Time: 16:53
+ * echo '<pre>Blog SETTER: '.$setter. ' TO '; print_r($val); echo '</pre>';
+ * echo '<pre>';print_r($this);echo '</pre><hr>';
  */
 
-class Blog {
+class Blog extends MainController {
 
-    private $blogs, $dresses, $famous,               // an arrays of articles
-        $famousQuote, $famousAuthor,                 // famous strings
-        $workImage, $blogImgPath,                    // image related string
-        $famArticles, $dressArticles, $blogArticles; // how many articles do we have to show on
-                                                     // the blog initial page
+    private $blogs, $dresses, $famous,      // an arrays of articles
+        $famousQuote, $famousAuthor,        // famous strings
+        $workImage, $blogImgPath,           // image related string
+        $famsCount, $dresCount, $blogCount; // how many articles do we have to show on
+                                            // the blog initial page
 
-    public function __construct($parent) {
-        if (empty($parent)) {
-            echo "The parent object didn't initialized properly!";
-            return 0;
-        } else {
-//            echo '<pre>';print_r($parent);echo '</pre><hr>';
-            foreach ($parent as $k => $v) {
-                $this->$k = $v;
+    private $initItems = array('blogImgPath','famsCount','dresCount','blogCount');
+
+    public function __construct($p) {
+        parent::__construct($p);
+
+        foreach ($this->initItems as $k) {
+            $val = $this->getCfgValue('site',$k);
+            $setter = 'set'. ucfirst($k);
+            if (method_exists($this, $setter)) {
+                $this->$setter($val);
+            } else {
+            //  $this->$k = $val; <-- it's not a true jedi way
+                continue;
             }
         }
+
         // path to image
         $this->setWorkImage();
-
-        // create an array of Famous articles (2 rows currently)
-        $this->setFamous();
 
         // create an array of Blogs articles (2 rows currently)
         $this->setBlogs();
 
         // create an array of Dresses articles (2 rows currently)
         $this->setDresses();
-    }
 
-    /**
-     * @return array
-     */
-    public function getBlogs() { return $this->blogs; }
+        // create an array of Famous articles (2 rows currently)
+        $this->setFamous();
 
-    /**
-     * @param array $blogs
-     */
-    private function setBlogs($blogs = array()) { $this->blogs = $blogs; }
-
-    /**
-     * @return array
-     */
-    public function getDresses() { return $this->dresses; }
-
-    /**
-     * @param array $dresses
-     */
-    private function setDresses($dresses = array()) { $this->dresses = $dresses; }
-
-    /**
-     * @return array
-     */
-    public function getFamous() {
-
-        return $this->famous;
-    }
-
-    /**
-     * @param array $famous
-     */
-    private function setFamous($famous = array()) {
-        $this->famous = $famous;
+        //
+        $this->getFamousRow();
 
     }
 
-    /**
-     * @return string
-     */
-    public function getFamousQuote() { return $this->famousQuote; }
 
-    /**
-     * @param string $famousQuote
-     */
-    private function setFamousQuote($famousQuote) { $this->famousQuote = $famousQuote; }
-
-    /**
-     * @return string
-     */
-    public function getFamousAuthor() { return $this->famousAuthor; }
-
-    /**
-     * @param string $famousAuthor
-     */
-    private function setFamousAuthor($famousAuthor) { $this->famousAuthor = $famousAuthor; }
-
-    /**
-     * @return mixed
-     */
-    public function getWorkImage() { return $this->workImage; }
-
-    /**
-     * @param mixed $workImage
-     */
-    private function setWorkImage($workImage = '') {
-        if (empty($workImage)) {
-            $imgList = $this->utils->getFilesFromDir($this->blogImgPath);
-            shuffle($imgList);
-            $this->workImage = array_shift($imgList);
-        } else {
-            $this->workImage = $workImage;
+    public function getFamousRow() {
+        if(sizeof($this->getFamous())>0) {
+            $fams = array_shift($this->famous);
+            $this->setFamousQuote($fams['phrase']);
+            $this->setFamousAuthor($fams['auth']);
         }
     }
 
-    /**
-     * @return mixed
-     */
+// blogs array
+    public function getBlogs() { return $this->blogs; }
+    private function setBlogs(array $blogs = array()) { $this->blogs = $blogs; }
+
+// dresses array
+    public function getDresses() { return $this->dresses; }
+    private function setDresses(array $dresses = array()) { $this->dresses = $dresses; }
+
+// famous phrases array
+    public function getFamous() { return $this->famous; }
+    private function setFamous(array $famous = array()) {
+        if ($famous === []) {
+            // increase the FamsCount to one since we need to
+            // set one additional row with famousQuote/famousAuthor
+            $fc = 1 +$this->getFamsCount();
+            // since there are no wise thoughts in Polish
+            $l = $this->getLangID(); if ($l == 1) { $l++; }
+            $famous = $this->data->getAll(QueryMap::SELECT_FAMOUS,
+                [$l, $fc ]);
+        }
+
+    $this->famous = $famous;
+    }
+
+// famousQuote
+    public function getFamousQuote() { return $this->famousQuote; }
+    private function setFamousQuote($famousQuote='') { $this->famousQuote = $famousQuote; }
+// famousAuthor
+    public function getFamousAuthor() { return $this->famousAuthor; }
+    private function setFamousAuthor($famousAuthor='') { $this->famousAuthor = $famousAuthor; }
+
+// workImage
+    public function getWorkImage() { return $this->workImage; }
+    private function setWorkImage($workImage = '') {
+        if (empty($workImage)) {
+            $imgList = $this->getUtilsObj()->getFilesFromDir($this->getBlogImgPath());
+            shuffle($imgList);
+            $workImage = array_shift($imgList);
+        }
+
+        $this->workImage = $workImage;
+    }
+
+// blogImgPath
     public function getBlogImgPath() { return $this->blogImgPath; }
-
-    /**
-     * @param mixed $blogImgPath
-     */
-    public function setBlogImgPath($blogImgPath) { $this->blogImgPath = $blogImgPath; }
-
-    /**
-     * @return mixed
-     */
-    public function getFamArticles() { return $this->famArticles; }
-
-    /**
-     * @param mixed $famArticles
-     */
-    public function setFamArticles($famArticles) { $this->famArticles = $famArticles; }
-
-    /**
-     * @return mixed
-     */
-    public function getDressArticles() { return $this->dressArticles; }
-
-    /**
-     * @param mixed $dressArticles
-     */
-    public function setDressArticles($dressArticles) { $this->dressArticles = $dressArticles; }
-
-    /**
-     * @return mixed
-     */
-    public function getBlogArticles() { return $this->blogArticles; }
-
-    /**
-     * @param mixed $blogArticles
-     */
-    public function setBlogArticles($blogArticles) { $this->blogArticles = $blogArticles; }
+    public function setBlogImgPath($blogImgPath) { $this->blogImgPath = ROOT_DIR.$blogImgPath; }
+// counters
+    public function getFamsCount() { return $this->famsCount; }
+    private function setFamsCount($famsCount) { $this->famsCount = $famsCount; }
+    protected function getDresCount() { return $this->dresCount; }
+    private function setDresCount($dresCount) { $this->dresCount = $dresCount; }
+    protected function getBlogCount() { return $this->blogCount; }
+    private function setBlogCount($blogCount) { $this->blogCount = $blogCount; }
 
 }

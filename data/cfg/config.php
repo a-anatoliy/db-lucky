@@ -5,7 +5,7 @@ return array(
     	'defLang' => 'pl',
         'imgIndex' => '/data/imgIndex.csv',
         'blogImgPath' => '/i/blog',
-     // how many articles do we have to show on the blog initial page
+    // how many articles do we have to show on the blog initial page
         'famsCount' => 2,   // famous art count
         'dresCount' => 2,   // dresses
         'blogCount' => 2,   // blogs
