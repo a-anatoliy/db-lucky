@@ -58,7 +58,8 @@ class Blog extends MainController {
 
 
 
-        return $outDataArray;
+//        return $outDataArray;
+        return $this;
     }
 
     public function setFamousRow() {

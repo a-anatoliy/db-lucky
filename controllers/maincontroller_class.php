@@ -105,31 +105,23 @@ class MainController extends AbstractController {
         $this->page_props['langAbbr'] = $this->getLang();
 
         // now create a blog object
-        $blogObject = new Blog($this);
+        $blogObject = new BlogController($this);
 
         // get random image, famousQuote and famousAuthor
-        foreach (array('workImage','famousQuote','famousAuthor') as $val) {
-            $getter = 'get'.$val;
-            $this->page_props[$val] = $blogObject->$getter();
-        }
+//        foreach (array('workImage','famousQuote','famousAuthor') as $val) {
+//            $getter = 'get'.$val;
+//            $this->page_props[$val] = $blogObject->$getter();
+//        }
 
+//            echo '<pre>';print_r($blogObject->getAllDataArr());echo '</pre>';
 
-        foreach (range(1, $blogObject->getFamsCount()) as $id) {
-            $blogObject->setFamousRow();
-            $q = $blogObject->getFamousQuote();
-            $a = $blogObject->getFamousAuthor();
+        $this->page_props = array_merge(
+            $this->page_props,
+            $blogObject->getAllDataArr()
+        );
 
-            $this->page_props['famous_'.$id] =
-                $this->view->render('famous_card', array(
-                    'famousQuote' => $q,
-                    'famousAuthor' => $a
-                ), true);
-        }
-
-//            echo '<pre>';print_r($this->page_props);echo '</pre>';
-
-        $this->page_props['dress']  = $this->view->render('dress_card',  array(), true);
-        $this->page_props['blog']   = $this->view->render('blog_card',   array(), true);
+//        $this->page_props['dress']  = $this->view->render('dress_card',  array(), true);
+//        $this->page_props['blog']   = $this->view->render('blog_card',   array(), true);
 
 
         $content = $this->view->render('blog_main', $this->page_props, true);

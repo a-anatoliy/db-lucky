@@ -6,9 +6,9 @@ return array(
         'imgIndex' => '/data/imgIndex.csv',
         'blogImgPath' => '/i/blog',
     // how many articles do we have to show on the blog initial page
-        'famsCount' => 2,   // famous art count
-        'dresCount' => 2,   // dresses
-        'blogCount' => 2,   // blogs
+        'famousCount'  => 2,   // famous count
+        'dressCount'   => 2,   // dresses
+        'articleCount' => 2,   // blogs
     ),
     'form' => array(
         'to'   => 'some@gmail.com',

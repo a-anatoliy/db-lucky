@@ -7,7 +7,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-set_include_path(get_include_path().PATH_SEPARATOR."core".PATH_SEPARATOR."controllers");
+set_include_path(get_include_path()
+    .PATH_SEPARATOR.'core'
+    .PATH_SEPARATOR.'controllers'
+    .PATH_SEPARATOR.'objects'
+);
 spl_autoload_extensions("_class.php");
 spl_autoload_register();
 

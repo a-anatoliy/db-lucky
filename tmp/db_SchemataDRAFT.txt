@@ -24,8 +24,8 @@
 
 ADD to each of dress SIZES, AVAILABLE_COLORS, CARRENCY, COLLECTION from an appropriate maps
 
-insert into color(1,'0 (XS)',2,'2 (XS)',3,'4 (S)',4,'6 (S)',5,'8 (M)',6,'10 (M)',7,'12 (L)',8,'14 (L)',9,'16 (XL)');
-insert into size(1,'white',2,'ivory',3,'soft white',4,'gold',5,'silver');
+insert into size (1,'0 (XS)',2,'2 (XS)',3,'4 (S)',4,'6 (S)',5,'8 (M)',6,'10 (M)',7,'12 (L)',8,'14 (L)',9,'16 (XL)');
+insert into color(1,'white',2,'ivory',3,'soft white',4,'gold',5,'silver');
 insert into carrency(1,'PLN');
 insert into dresses(1,'VW351178','Marie Clare',
 'NEW to Bridal Pre-spring 18. Perfectly partnered with our NEW Marie Gown, this embroidered cape in antique blue features a new technique designed to capture the delicacy and beauty of antique lace. Fully embellished with iridescent sequins, this bridal cape has a satin ribbon tie detail for easy styling and is relaxed in fit. The perfect bridal accessory to compliment your wedding dress.<p><br>By Whispers & Echoes<br>Only available at BHLDN<br>Style #45266756</p',
