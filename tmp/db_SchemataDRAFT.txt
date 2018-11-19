@@ -27,9 +27,15 @@ ADD to each of dress SIZES, AVAILABLE_COLORS, CARRENCY, COLLECTION from an appro
 insert into size (1,'0 (XS)',2,'2 (XS)',3,'4 (S)',4,'6 (S)',5,'8 (M)',6,'10 (M)',7,'12 (L)',8,'14 (L)',9,'16 (XL)');
 insert into color(1,'white',2,'ivory',3,'soft white',4,'gold',5,'silver');
 insert into carrency(1,'PLN');
+
 insert into dresses(1,'VW351178','Marie Clare',
 'NEW to Bridal Pre-spring 18. Perfectly partnered with our NEW Marie Gown, this embroidered cape in antique blue features a new technique designed to capture the delicacy and beauty of antique lace. Fully embellished with iridescent sequins, this bridal cape has a satin ribbon tie detail for easy styling and is relaxed in fit. The perfect bridal accessory to compliment your wedding dress.<p><br>By Whispers & Echoes<br>Only available at BHLDN<br>Style #45266756</p',
 'WHITE BY VERA WANG TEXTURED ORGANZA WEDDING DRESS',
 '<div>Back zip with hook-and-eye closure; covered buttons<br>Polyester; polyester lining<br>Bust cups; boning<br>Professionally clean<br>Imported<br>We recommend pairing this gown with a veil in ivory<br>All gowns and select bridal apparel items require an additional shipping charge of $15</div>',
 5378,NULL,NULL,NULL,4,4,'Delicate dry clean only',NOW,1,1);
 
+наилучший способ связки таблиц с точки зрения добавления/удаления новых позиций три таблицы:
+images -> dresses -> collection
+
+Одна запись в dresses имеет одну и более записей images + одну и более в collection
+сейчас
