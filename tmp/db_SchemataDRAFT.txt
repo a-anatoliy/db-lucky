@@ -34,8 +34,3 @@ insert into dresses(1,'VW351178','Marie Clare',
 '<div>Back zip with hook-and-eye closure; covered buttons<br>Polyester; polyester lining<br>Bust cups; boning<br>Professionally clean<br>Imported<br>We recommend pairing this gown with a veil in ivory<br>All gowns and select bridal apparel items require an additional shipping charge of $15</div>',
 5378,NULL,NULL,NULL,4,4,'Delicate dry clean only',NOW,1,1);
 
-наилучший способ связки таблиц с точки зрения добавления/удаления новых позиций три таблицы:
-images -> dresses -> collection
-
-Одна запись в dresses имеет одну и более записей images + одну и более в collection
-сейчас

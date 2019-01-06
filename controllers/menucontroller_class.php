@@ -21,7 +21,7 @@ class MenuController  {
             return 0;
         } else {
 
-            $this->ul_open  = '<ul class="navbar-nav">';
+            $this->ul_open  = '<ul class="navbar-nav justify-content-center">';
             $this->ul_close = '</ul>';
             $this->li_open  = '<li class="nav-item">';
             $this->activeHrefStr = '<a class="nav-link active-link" href="%s">%s</a>';

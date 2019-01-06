@@ -24,6 +24,7 @@ class BlogController extends MainController {
             $cnfg = $k.'Count';
             $val = $this->getCfgValue('site',$cnfg);
             $setter = 'set'. ucfirst($k);
+
             if (method_exists($this, $setter)) {
                 $this->$setter($val);
             } else {
@@ -46,6 +47,7 @@ class BlogController extends MainController {
 
         foreach ($this->initItems as $objectName) {
             $getter = 'get'. ucfirst($objectName);
+
             $arr = $this->$getter();
             if (is_array($arr)) {
                 foreach($arr as $key => $val) {
@@ -89,7 +91,7 @@ class BlogController extends MainController {
     private function getDress() { return $this->dress; }
     private function setDress($count)   {
         $dresses = new Dress($this->getLangID(),$count,$this->data);
-        $this->dress = $dresses;
+        $this->dress = $dresses->getItems();
     }
 
     private function getArticle() { return $this->article; }

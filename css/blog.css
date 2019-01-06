@@ -58,7 +58,7 @@ body {
 .footer-handwrited { font-family: 'Italianno', cursive; font-size: 1.8rem; }
 .blog-header {
     /*line-height: 1; border-bottom: 2px dotted #dcdcdc; */
-    background-image: url("/i/tophline.png"); background-repeat: repeat-x; background-position: bottom;
+    /* background-image: url("/i/tophline.png"); background-repeat: repeat-x; background-position: bottom; */
 }
 #bordered {
     line-height: 1; border-bottom: 1px solid #dcdcdc;
@@ -67,6 +67,14 @@ body {
 .blog-header-spacing {  font-size: 3rem; letter-spacing: 5px; word-spacing: 20px; }
 .blog-header-logo { font-family: 'Great Vibes', cursive; }
 */
+
+.blog-weight { font-size: 2.25rem; font-weight: bolder !important; }
+.blog-header-logoa { font-family: 'Roboto Condensed', sans-serif; }
+.blog-header-logob { font-family: 'Rubik', sans-serif; }
+.blog-header-logoc { font-family: 'Playfair Display', serif; letter-spacing: 5px; word-spacing: 20px; }
+.blog-header-logod { font-family: 'Old Standard TT', serif; }
+.blog-header-logoe { font-family: 'Arapey', serif; }
+
 
 .bukvica { text-indent: 1.5em; padding-bottom: 12px; }
 p::first-letter { font-family: 'Great Vibes', cursive; font-size: 2.25rem; color: red; }
@@ -149,11 +157,13 @@ h1, h2, h3, h4, h5, h6 { font-family: "Playfair Display", Georgia, "Times New Ro
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05) !important; }
 
+/* .menu {padding-left: 26% } */
 /*.nav-link { text-shadow: #666666 0.1em 0.1em 0.2em; font-weight: 700; }*/
 .nav-link {
-    font-weight: 600;
-    font-family: 'Comfortaa';
-    text-shadow: 0px 1px 1px #666666;
+    /* font-weight: 600; */
+    /* font-family: 'Comfortaa'; */
+    font-family: 'Arial';
+    /* text-shadow: 0px 1px 1px #666666; */
 }
 /*text-shadow: 1px 1px white, -1px -1px #444;*/
 

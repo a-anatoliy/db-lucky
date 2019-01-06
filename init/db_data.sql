@@ -215,18 +215,19 @@ INSERT INTO `ld_collection` (id, name) VALUES (null ,'2017'), (null ,'2018'),  (
 -- `ld_dresses`
 --
 -- 1.
-INSERT INTO `ld_dresses` (`id`,`article_num`,`url_name`,`title`,`short_descr`,`product_details`,`price`,
-`offer_price`,`discount_price`,`price_offer_end_date`,`order_count`,`like_count`,`view_count`,`care_advice`,
-`add_date`,`is_available`,`is_active`) VALUES
-  (1,'VW351178', 'Aurora','Aurora','Aurora w mitologii rzymskiej bogini zorzy porannej, brzasku i świtu (poranku)',
-    '',4050,0,0,0,0,0,0,'Delicate dry clean only',UNIX_TIMESTAMP(),1,1 );
+INSERT INTO `ld_dresses` (`id`,`article_num`,`url_name`,`title`,`price`,`offer_price`,`discount_price`,
+`price_offer_end_date`,`order_count`,`like_count`,`view_count`,`add_date`,`is_available`,`is_active`) VALUES
+  (1,'VW351178', 'Aurora','Aurora',4050,0,0,0,0,0,0,UNIX_TIMESTAMP(),1,1 );
 -- now insert the data into all of related tables, using this dress_id
 -- descriptions dress_images size(size_map) collection(collection_map) color(color_map) currency(currency_map)
 -- descriptions
-INSERT INTO `ld_descriptions` (`id`,`dress_id`,`description`,`lang_id`) values
-  (null ,1,'Fantastyczna suknia evasé wykonana z białej krepy i kamieni w kolorze złota, tworzących kwiatowe motywy.
+INSERT INTO `ld_descriptions` (`id`,`lang_id`,`dress_id`,`description`,`short_descr`,`product_details`,`care_advices`) values
+  (null,1,1,'Fantastyczna suknia evasé wykonana z białej krepy i kamieni w kolorze złota, tworzących kwiatowe motywy.
     Fason inspirowany Grecją, łączący w sobie spódnicę z niską talią z bardzo twarzowym dekoltem w łódkę oraz niewiarygodnymi, drapowanymi plecami z detalami z kamieni przy krągłościach i ramionach.
-    Długie rękawy są również zdobione połyskującymi elementami w kolorze złota przy nadgarstkach, podkreślając styl Olimpu.',1);
+    Długie rękawy są również zdobione połyskującymi elementami w kolorze złota przy nadgarstkach, podkreślając styl Olimpu.',
+   'Aurora w mitologii rzymskiej bogini zorzy porannej, brzasku i świtu (poranku)',
+   '<div>Back zip with hook-and-eye closure; covered buttons<br>Polyester; polyester lining<br>Bust cups; boning<br>Professionally clean<br>Imported<br>We recommend pairing this gown with a veil in ivory<br>All gowns and select bridal apparel items require an additional shipping charge of $15</div>',
+   'Delicate dry clean only');
 -- dress_images
 INSERT INTO `ld_dress_images` (id, path, name, width, height, is_active, dress_id) VALUES
   (null ,'/i/dress/2018/001','_R7A1012.jpg',600,900,1,1),
@@ -234,11 +235,9 @@ INSERT INTO `ld_dress_images` (id, path, name, width, height, is_active, dress_i
   (null ,'/i/dress/2018/001','_R7A1045.jpg',600,900,1,1);
 -- dress inserting DONE --
 -- 2. ---------------------------------------------------------------------------------------------
-INSERT INTO `ld_dresses` (`id`,`article_num`,`url_name`,`title`,`short_descr`,`product_details`,`price`,
-                          `offer_price`,`discount_price`,`price_offer_end_date`,`order_count`,`like_count`,`view_count`,`care_advice`,
-                          `add_date`,`is_available`,`is_active`) VALUES
-  (2,'VW351176', 'Westa','vesta','Westa (łac. Vesta) – w mitologii rzymskiej bogini ogniska domowego i państwowego',
-     '',3080,0,0,0,0,0,0,'Delicate dry clean only',UNIX_TIMESTAMP(),1,1 );
+INSERT INTO `ld_dresses` (`id`,`article_num`,`url_name`,`title`,`price`,`offer_price`,`discount_price`,
+`price_offer_end_date`,`order_count`,`like_count`,`view_count`,`add_date`,`is_available`,`is_active`) VALUES
+  (2,'VW351176', 'Westa','vesta',3080,0,0,0,0,0,0,UNIX_TIMESTAMP(),1,1 );
 -- dress_images
 INSERT INTO `ld_dress_images` (id, path, name, width, height, is_active, dress_id) VALUES
   (null ,'/i/dress/2018/002','_R7A1126.jpg',600,900,1,2),
@@ -246,26 +245,24 @@ INSERT INTO `ld_dress_images` (id, path, name, width, height, is_active, dress_i
   (null ,'/i/dress/2018/002','_R7A1119.jpg',600,900,1,2),
   (null ,'/i/dress/2018/002','_R7A1630.jpg',600,900,1,2);
 -- descriptions
-INSERT INTO `ld_descriptions` (`id`,`dress_id`,`description`,`lang_id`) values
-  (null ,2,'Urocza i romantyczna dzięki niewinnemu pięknu, które potrafią wydobyć jedynie miękki tiul i kwiaty.
+INSERT INTO `ld_descriptions` (`id`,`lang_id`,`dress_id`,`description`,`short_descr`,`product_details`,`care_advices`) values
+  (null,1,2,'Urocza i romantyczna dzięki niewinnemu pięknu, które potrafią wydobyć jedynie miękki tiul i kwiaty.
     Tiulowa, dopasowana w talii spódnica evasé, połączona z koronkowym stanikiem z dekoltem w łódkę.
-    Bardzo wyjątkowa kreacja dla wyjątkowej panny młodej.',1);
+    Bardzo wyjątkowa kreacja dla wyjątkowej panny młodej.','Westa (łac. Vesta) – w mitologii rzymskiej bogini ogniska domowego i państwowego','','Delicate dry clean only');
 
 -- 3. -----------------------------------------------------------------------------------------------
-INSERT INTO `ld_dresses` (`id`,`article_num`,`url_name`,`title`,`short_descr`,`product_details`,`price`,
-                          `offer_price`,`discount_price`,`price_offer_end_date`,`order_count`,`like_count`,`view_count`,`care_advice`,
-                          `add_date`,`is_available`,`is_active`) VALUES
-  (3,'VW351177', 'Izyda','Izyda','Izyda (egip. Iset, Iszet) – w mitologii egipskiej bogini płodności, opiekunka rodzin.',
-     '',5150,0,0,0,0,0,0,'Delicate dry clean only',UNIX_TIMESTAMP(),1,1 );
+INSERT INTO `ld_dresses` (`id`,`article_num`,`url_name`,`title`,`price`,`offer_price`,`discount_price`,
+`price_offer_end_date`,`order_count`,`like_count`,`view_count`,`add_date`,`is_available`,`is_active`) VALUES
+  (3,'VW351177', 'Izyda','Izyda',5150,0,0,0,0,0,0,UNIX_TIMESTAMP(),1,1 );
 -- dress_images
 INSERT INTO `ld_dress_images` (id, path, name, width, height, is_active, dress_id) VALUES
   (null ,'/i/dress/2018/006','_R7A5378.jpg',600,900,1,3),
   (null ,'/i/dress/2018/006','_R7A5378_1.jpg',600,400,1,3);
 -- descriptions
-INSERT INTO `ld_descriptions` (`id`,`dress_id`,`description`,`lang_id`) values
-  (null ,3,'Najbardziej artystyczny romantyzm ucieleśniony w tej koronkowo-tiulowej kreacji.
+INSERT INTO `ld_descriptions` (`id`,`lang_id`,`dress_id`,`description`,`short_descr`,`product_details`,`care_advices`) values
+  (null,1,3,'Najbardziej artystyczny romantyzm ucieleśniony w tej koronkowo-tiulowej kreacji.
     Suknia, która posługuje się naturalną magią i przezroczystościami tkaniny, by stworzyć dopasowaną w talii sylwetkę evasé z okrągłym dekoltem i odkrytymi plecami.
-    Krótkie koronkowe rękawy odsłaniają również ramiona.',1);
+    Krótkie koronkowe rękawy odsłaniają również ramiona.','Izyda (egip. Iset, Iszet) – w mitologii egipskiej bogini płodności, opiekunka rodzin.','','Delicate dry clean only');
 
 -- --------------------------------------------------
 -- size(size_map)

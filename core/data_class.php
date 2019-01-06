@@ -95,6 +95,32 @@ class Data {
         }
     }
 
+    /**
+     * call the stored procedure or function
+     */
+    public function callProc($proc,$param = array()) {
+        try {
+            $stmt = $this->dbc->prepare($proc);
+            $stmt->bindParam(1, $param[0]);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }  catch(PDOException $e) {
+            echo __LINE__.' - '.$e->getMessage();
+        }
+    }
+
+    /**
+     * get value
+     */
+    public function getValue($query, $param = array(), $default = null) {
+        $result = self::getAll($query, $param);
+        if (!empty($result)) {
+            $result = array_shift($result);
+        }
+
+        return (empty($result)) ? $default : $result;
+    }
+
     /* Function runQuery
      * Runs a insert, update or delete query
      * @param string sql insert update or delete statement
