@@ -324,28 +324,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COMMENT = 'related to SIZE table, that contains all of sizes';
 
-
--- -----------------------------------------------------
--- Table `luckyDress_db`.`ld_user_role`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `luckyDress_db`.`ld_user_role` ;
-
-CREATE TABLE IF NOT EXISTS `luckyDress_db`.`ld_user_role` (
-  `role_id` TINYINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `lang_id` TINYINT(1) UNSIGNED NULL DEFAULT '1',
-  `name` CHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  INDEX `fk_ld_user_role_ld_langs1_idx` (`lang_id`),
-  CONSTRAINT `fk_ld_user_role_ld_langs1`
-    FOREIGN KEY (`lang_id`)
-    REFERENCES `luckyDress_db`.`ld_langs` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'user roles';
-
-
 -- -----------------------------------------------------
 -- Table `luckyDress_db`.`ld_descriptions`
 -- -----------------------------------------------------
@@ -396,6 +374,85 @@ COLLATE = utf8_bin
 COMMENT = 'the dress images';
 
 
+-- -----------------------------------------------------
+-- Table `luckyDress_db`.`ld_articles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `luckyDress_db`.`ld_articles` ;
+
+CREATE TABLE IF NOT EXISTS `luckyDress_db`.`ld_articles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `user_id` int(11) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL UNIQUE,
+  `view_count` int(11) NOT NULL DEFAULT '0',
+  `content` text NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin
+COMMENT = 'the blog articles';
+
+
+-- -----------------------------------------------------
+-- Table `luckyDress_db`.`ld_user_auth`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ld_user_auth`;
+
+CREATE TABLE IF NOT EXISTS `luckyDress_db`.`ld_user_auth` (
+  `user_id`    INT(11) unsigned NOT NULL AUTO_INCREMENT,
+  `lgn_name`   varchar(255) NOT NULL,
+  `usr_name`   varchar(255) NOT NULL,
+  `usr_pswd`   varchar(255) NOT NULL,
+  `usr_role`   tinyint(1) NOT NULL DEFAULT '2',
+  `mail`       varchar(255) DEFAULT NULL,
+  `link`       varchar(255) DEFAULT NULL,
+  `skype`      varchar(255) DEFAULT NULL,
+  `signature`  varchar(500) DEFAULT NULL,
+  `lang_id`    tinyint(1) unsigned DEFAULT '1',
+  `show_mail`  enum('1','0') NOT NULL DEFAULT '0',
+  `gender`     enum('1','0') NOT NULL DEFAULT '1',
+  `posts`      int(11) DEFAULT NULL,
+  `raiting`    int(11) DEFAULT NULL,
+  `last_login` int(10) DEFAULT NULL,
+  `reg_date`   int(10) DEFAULT NULL,
+  `company`    varchar(255) DEFAULT NULL,
+  `photo`      varchar(255) DEFAULT NULL,
+  `active`     enum('1','0') NOT NULL DEFAULT '1',
+  PRIMARY KEY (`user_id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COLLATE = utf8_bin
+  COMMENT = 'registered users';
+
+-- -----------------------------------------------------
+-- Table `luckyDress_db`.`ld_user_role`
+-- -----------------------------------------------------
+-- (1,1,'Administrator'),(2,1,'Ыubskrybent'),(3,1,'Edytor'),(4,1,'Autor'),(5,1,'Uczestnik');
+-- (1,2,'Administrator'),(2,2,'Subscriber'),(3,2,'Edithor'),(4,2,'Author'),(5,2,'User');
+-- (1,3,'Администратор'),(2,3,'Подписчик'),(3,3,'Редактор'),(4,3,'Автор'),(5,3,'Участник');
+DROP TABLE IF EXISTS `luckyDress_db`.`ld_user_role` ;
+
+CREATE TABLE IF NOT EXISTS `luckyDress_db`.`ld_user_role` (
+  `role_id` TINYINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `lang_id` TINYINT(1) UNSIGNED NULL DEFAULT '1',
+  `name` CHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`role_id`),
+  INDEX `fk_ld_user_role_ld_langs1_idx` (`lang_id`),
+  CONSTRAINT `fk_ld_user_role_ld_langs1`
+    FOREIGN KEY (`lang_id`)
+      REFERENCES `luckyDress_db`.`ld_langs` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'user roles';
+
+
+
 -- get random dress image by dress id
 -- select getRndDressImg(1) as img limit 1;
 DROP function IF EXISTS `getRndDressImg`;
@@ -424,6 +481,25 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+DROP function IF EXISTS `SPLIT_STR`;
+CREATE FUNCTION `SPLIT_STR`
+(    str VARCHAR(2000),
+     delim VARCHAR(12),
+     pos INT )
+  RETURNS varchar(255) CHARSET utf8
+  COMMENT 'split the inout string'
+RETURN
+  REPLACE(
+      SUBSTRING(
+          SUBSTRING_INDEX(str, delim, pos),
+          CHAR_LENGTH(
+              SUBSTRING_INDEX(str, delim, pos - 1)
+            ) + 1
+        ),
+      delim,
+      ''
+    );
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
